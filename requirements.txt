@@ -1,0 +1,4 @@
+# Updated: 24.11.2017
+
+# Core
+Django>=1.11.7
