@@ -1,6 +1,9 @@
 html, body {
     font-family: 'Nunito', sans-serif;
 }
+tr, th, td {
+    height: 30px !important;
+}
 .sticky-header .header-section {
     position: fixed;
     top: 0;

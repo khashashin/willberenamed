@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+  {% for team in teams %}
+  <div class="row">
+    <table border="2" width="1200px">
+      <tbody>
+        <tr>
+          <th colspan="5">{{team.team_name}}</th>
+        </tr>
+        <tr>
+          <td colspan="2" rowspan="3">{{team.team_logo}}</td>
+          <th colspan="3">Staff</th>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <th>Vorname</th>
+          <th>Position</th>
+        </tr>
+        <tr>
+          <td>{{team.staff_name}}</td>
+          <td>{{team.staff_vorname}}</td>
+          <td>{{team.staff_position}}</td>
+        </tr>
+        <tr>
+          <th colspan="5">Rooster</th>
+        </tr>
+        <tr>
+          <th>Nr</th>
+          <th>Name</th>
+          <th>Vorname</th>
+          <th>Position</th>
+          <th>Jahrgang</th>
+        </tr>
+        <tr>
+          <td>{{team.sp_nr}}</td>
+          <td>{{team.sp_name}}</td>
+          <td>{{team.sp_vorname}}</td>
+          <td>{{team.sp_pos}}</td>
+          <td>{{team.sp_jahrgang}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
