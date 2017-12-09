@@ -1,44 +1,58 @@
 {% load static wagtailuserbar %}
-
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>
-            {% block title %}
-                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-                {% with self.get_site.site_name as site_name %}
-                    {% if site_name %}- {{ site_name }}{% endif %}
-                {% endwith %}
-            {% endblock %}
-        </title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/treichle_cup.css' %}">
-
-        {% block extra_css %}
-            {# Override this in templates to add extra stylesheets #}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="TreichleCup, Sport, Schweiz, Switzerland" />
+    <meta name="description" content="" />
+    <!-- <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script> -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icon-font.min.css' %}">
+    <!-- Webfonts -->
+    <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <title>
+        {% block title %}
+            {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
         {% endblock %}
-    </head>
-
-    <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
-
-        {% block content %}{% endblock %}
-
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/treichle_cup.js' %}"></script>
-
-        {% block extra_js %}
-            {# Override this in templates to add extra javascript #}
+        {% block title_suffix %}
+            {% with self.get_site.site_name as site_name %}
+                {% if site_name %}- {{ site_name }}{% endif %}
+            {% endwith %}
         {% endblock %}
-    </body>
+    </title>
+  </head>
+  <body class="sticky-header left-side-collapsed">
+    <section>
+      {% wagtailuserbar %}
+
+      {% include 'sidebar.html' %}
+      <div class="main-content">
+
+        {% include 'header.html' %}
+
+        {% block content %}
+        {% endblock %}
+
+      </div>
+    </section>
+    <!-- Optional JavaScript -->
+    {% block extra_js %}
+        {# Override this in templates to add extra javascript #}
+    {% endblock %}
+    <script src="{% static 'js/jquery.nicescroll.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/popper-1.13.0.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </body>
 </html>

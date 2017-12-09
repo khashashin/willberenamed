@@ -58,16 +58,10 @@ class TeamRooster(Page):
 
 
     content_panels = [
-        FieldPanel('team_name', classname="col6"),
+        FieldPanel('team_name', classname="col12"),
         ImageChooserPanel('team_logo'),
-        MultiFieldPanel(
-            [ StreamFieldPanel('staff') ],
-            heading="Staff", classname="col12"
-        ),
-        MultiFieldPanel(
-            [ StreamFieldPanel('spieler') ],
-            heading="Spieler", classname="col12"
-        )
+        StreamFieldPanel('staff'),
+        StreamFieldPanel('spieler'),
     ]
 
     def __str__(self):
