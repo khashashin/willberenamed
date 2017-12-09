@@ -50,10 +50,10 @@ class TeamRooster(Page):
     )
     staff = StreamField([
         ('staff', CardsBlock(Staff(), icon="plus")),
-    ], blank=True)
+    ], default='', blank=True)
     spieler = StreamField([
         ('spieler', CardsBlock(Spieler(), icon="user")),
-    ], blank=True)
+    ], default='', blank=True)
 
 
 

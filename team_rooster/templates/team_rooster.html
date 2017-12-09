@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load wagtailcore_tags %}
 
 {% block content %}
 <div class="container">
   {% for team in teams %}
   <div class="row">
-    <table border="2" width="1200px">
+    <table border="2" width="100%">
       <tbody>
         <tr>
           <th colspan="5">{{team.team_name}}</th>
@@ -20,9 +21,9 @@
           <th>Position</th>
         </tr>
         <tr>
-          <td>{{team.staff_name}}</td>
-          <td>{{team.staff_vorname}}</td>
-          <td>{{team.staff_position}}</td>
+          <td>{{team.staff.name}}</td>
+          <td>{{team.staff.vorname}}</td>
+          <td>{{team.staff.position}}</td>
         </tr>
         <tr>
           <th colspan="5">Rooster</th>
@@ -35,11 +36,11 @@
           <th>Jahrgang</th>
         </tr>
         <tr>
-          <td>{{team.sp_nr}}</td>
-          <td>{{team.sp_name}}</td>
-          <td>{{team.sp_vorname}}</td>
-          <td>{{team.sp_pos}}</td>
-          <td>{{team.sp_jahrgang}}</td>
+          <td>{{team.spieler.nummer}}</td>
+          <td>{{team.spieler.name}}</td>
+          <td>{{team.spieler.vorname}}</td>
+          <td>{{team.spieler.position}}</td>
+          <td>{{team.spieler.jahrgang}}</td>
         </tr>
       </tbody>
     </table>
