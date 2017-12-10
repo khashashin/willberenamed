@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Model as Dmodel
 from django.utils.translation import ugettext_lazy as _
 
 from wagtail.wagtailcore.blocks import StructBlock, CharBlock, ChoiceBlock, IntegerBlock
@@ -40,7 +41,7 @@ class Spieler(StructBlock):
     class Meta:
         icon = 'user'
 
-class TeamRooster(Page):
+class TeamRooster(Dmodel):
     team_name = models.CharField(max_length=100, default="")
     team_logo = models.ForeignKey(
         'wagtailimages.Image',
@@ -50,10 +51,10 @@ class TeamRooster(Page):
     )
     staff = StreamField([
         ('staff', CardsBlock(Staff(), icon="plus")),
-    ], default='', blank=True)
+    ], blank=True)
     spieler = StreamField([
         ('spieler', CardsBlock(Spieler(), icon="user")),
-    ], default='', blank=True)
+    ], blank=True)
 
 
 
