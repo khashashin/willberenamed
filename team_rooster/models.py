@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Model as Dmodel
 from django.utils.translation import ugettext_lazy as _
 
 from wagtail.wagtailcore.blocks import StructBlock, CharBlock, ChoiceBlock, IntegerBlock
@@ -41,7 +40,7 @@ class Spieler(StructBlock):
     class Meta:
         icon = 'user'
 
-class TeamRooster(Dmodel):
+class TeamRooster(Page):
     team_name = models.CharField(max_length=100, default="")
     team_logo = models.ForeignKey(
         'wagtailimages.Image',

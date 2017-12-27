@@ -1,8 +1,5 @@
-# Updated: 09.12.2017
-
-# Core
-wagtail==1.13.1
-Django==1.11.7
+Django>=1.11,<1.12
+wagtail>=1.13,<1.14
 
 # Projectbased
 wagtailmodelchooser==0.2.0
