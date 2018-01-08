@@ -40,7 +40,7 @@ class Spieler(StructBlock):
     class Meta:
         icon = 'user'
 
-class TeamRooster(Page):
+class TeamRooster(models.Model):
     team_name = models.CharField(max_length=100, default="")
     team_logo = models.ForeignKey(
         'wagtailimages.Image',
