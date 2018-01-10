@@ -55,9 +55,10 @@ class TeamRooster(Page):
         ('spieler', CardsBlock(Spieler(), icon="user")),
     ], blank=True)
 
-
+    parent_page_types = ['home.HomePage']
 
     content_panels = [
+        FieldPanel('title'),
         FieldPanel('team_name', classname="col12"),
         ImageChooserPanel('team_logo'),
         StreamFieldPanel('staff'),
