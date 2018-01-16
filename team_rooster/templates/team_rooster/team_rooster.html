@@ -1,17 +1,16 @@
-{% extends 'base.html' %}
-{% load wagtailcore_tags %}
+{% extends "base.html" %}
+{% load wagtailcore_tags positions_tags %}
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-<div class="container">
-  {% for team in teams %}
   <div class="row">
     <table border="2" width="100%">
       <tbody>
         <tr>
-          <th colspan="5">{{team.team_name}}</th>
+          <th colspan="5">{{page.team_name}}</th>
         </tr>
         <tr>
-          <td colspan="2" rowspan="3">{{team.team_logo}}</td>
+          <td colspan="2" rowspan="3">{{page.team_logo}}</td>
           <th colspan="3">Staff</th>
         </tr>
         <tr>
@@ -19,11 +18,16 @@
           <th>Vorname</th>
           <th>Position</th>
         </tr>
-        <tr>
-          <td>{{team.staff.name}}</td>
-          <td>{{team.staff.vorname}}</td>
-          <td>{{team.staff.position}}</td>
-        </tr>
+        {% for block in page.staff %}
+          {% for val in block.value %}
+          <tr>
+            <td>{{val.name}}</td>
+            <td>{{val.vorname}}</td>
+            {% get_position_display_name val.position as label %}
+            <td>{{ label }}</td>
+          </tr>
+          {% endfor %}
+        {% endfor %}
         <tr>
           <th colspan="5">Rooster</th>
         </tr>
@@ -34,17 +38,19 @@
           <th>Position</th>
           <th>Jahrgang</th>
         </tr>
-        <tr>
-          <td>{{team.spieler.nummer}}</td>
-          <td>{{team.spieler.name}}</td>
-          <td>{{team.spieler.vorname}}</td>
-          <td>{{team.spieler.position}}</td>
-          <td>{{team.spieler.jahrgang}}</td>
-        </tr>
+        {% for block in page.spieler %}
+          {% for val in block.value %}
+          <tr>
+            <td>{{val.nummer}}</td>
+            <td>{{val.name}}</td>
+            <td>{{val.vorname}}</td>
+            {% get_position_sp_display_name val.position as label %}
+            <td>{{label}}</td>
+            <td>{{val.jahrgang}}</td>
+          </tr>
+          {% endfor %}
+        {% endfor %}
       </tbody>
     </table>
   </div>
-  {% endfor %}
-</div>
-
 {% endblock %}

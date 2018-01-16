@@ -8,19 +8,18 @@ from wagtailblocks_cards.blocks import CardsBlock
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.wagtailcore.fields import StreamField
+from .constanten import POSITIONS, POSITIONS_SP
 
 
 # Create your models here.
+class Teams(Page):
+    parent_page_types = ['home.HomePage']
 
 class Staff(StructBlock):
     photo = ImageChooserBlock(required=False)
     name = CharBlock(required=True)
     vorname = CharBlock(required=True)
-    position = ChoiceBlock(choices=[
-        ('headcouch', 'Headcouch'),
-        ('assistenz', 'Assistenz-Coach'),
-        ('betreuer', 'Betreuer'),
-        ], icon='cup')
+    position = ChoiceBlock(choices=POSITIONS, icon='cup')
 
     class Meta:
         icon = 'plus'
@@ -30,11 +29,7 @@ class Spieler(StructBlock):
     nummer = IntegerBlock(required=True)
     name = CharBlock(required=True)
     vorname = CharBlock(required=True)
-    position = ChoiceBlock(choices=[
-        ('th', 'TH'),
-        ('st', 'ST'),
-        ('vt', 'VT'),
-        ], icon='cup')
+    position = ChoiceBlock(choices=POSITIONS_SP, icon='cup')
     jahrgang = IntegerBlock(required=True)
 
     class Meta:
@@ -55,7 +50,7 @@ class TeamRooster(Page):
         ('spieler', CardsBlock(Spieler(), icon="user")),
     ], blank=True)
 
-    parent_page_types = ['home.HomePage']
+    parent_page_types = ['team_rooster.Teams']
 
     content_panels = [
         FieldPanel('title'),

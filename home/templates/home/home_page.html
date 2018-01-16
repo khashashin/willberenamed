@@ -1,5 +1,15 @@
 {% extends "base.html" %}
-{% block title %}
-Treichle-Cup
+{% load static wagtailcore_tags %}
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+
+<p>Do you see me?</p>
+<p>Do you see me?</p>
+<p>Do you see me?</p>
+<p>Do you see me?</p>
+<p>Do you see me?</p>
+<p>Do you see me?</p>
+<p>Do you see me?</p>
+
 {% endblock %}
-{% block body_class %}template-homepage{% endblock %}
