@@ -1,15 +1,27 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-
-<p>Do you see me?</p>
-<p>Do you see me?</p>
-<p>Do you see me?</p>
-<p>Do you see me?</p>
-<p>Do you see me?</p>
-<p>Do you see me?</p>
-<p>Do you see me?</p>
-
+<div class="col-md-9">
+  <div class="row">
+    {% for news in page.get_children %}
+      {% with news=news.specific %}
+        <div class="col-md-3">
+          <div class="card">
+            <a href="{% pageurl news %}">
+            {% image news.feed_image fill-500x200 class='card-img-top rounded' %}
+            <div class="card-block">
+              <h2 class="card-text">{{ news.title }}</h2>
+            </div>
+          </a>
+          </div>
+        </div>
+      {% endwith %}
+      {% if forloop.counter|divisibleby:3 and not forloop.last %}
+    </div><br><div class="row">
+      {% endif %}
+    {% endfor %}
+  </div><br>
+</div>
 {% endblock %}

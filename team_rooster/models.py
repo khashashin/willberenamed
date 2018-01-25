@@ -6,14 +6,21 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtailblocks_cards.blocks import CardsBlock
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
+from wagtail.wagtailadmin.edit_handlers import (
+    FieldPanel,
+    StreamFieldPanel,
+)
 from wagtail.wagtailcore.fields import StreamField
 from .constanten import POSITIONS, POSITIONS_SP
 
 
 # Create your models here.
 class Teams(Page):
-    parent_page_types = ['home.HomePage']
+    content_panels = [
+        FieldPanel('title'),#TODO help_text='Erstelle Teamseite mit dem Titel "Teams"'),
+    ]
+    class Meta:
+        verbose_name_plural = "Teams"
 
 class Staff(StructBlock):
     photo = ImageChooserBlock(required=False)
@@ -36,7 +43,6 @@ class Spieler(StructBlock):
         icon = 'user'
 
 class TeamRooster(Page):
-    team_name = models.CharField(max_length=100, default="")
     team_logo = models.ForeignKey(
         'wagtailimages.Image',
         null=True, blank=True,
@@ -54,7 +60,6 @@ class TeamRooster(Page):
 
     content_panels = [
         FieldPanel('title'),
-        FieldPanel('team_name', classname="col12"),
         ImageChooserPanel('team_logo'),
         StreamFieldPanel('staff'),
         StreamFieldPanel('spieler'),
