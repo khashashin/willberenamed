@@ -33,16 +33,17 @@
   <body class="sticky-header left-side-collapsed">
     <section>
       {% wagtailuserbar %}
-
       {% include 'sidebar.html' %}
-      
+
       <div class="main-content">
 
-        {% include 'header.html' %}
+          {% include 'header.html' %}
 
-        {% block content %}
-        {% endblock %}
+          <div class="container" style="margin-top: 80px">
 
+          {% block content %}
+          {% endblock %}
+          </div>
       </div>
     </section>
     <!-- Optional JavaScript -->

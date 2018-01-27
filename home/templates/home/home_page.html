@@ -1,6 +1,18 @@
 {% extends "base.html" %}
-
-{% block body_class %}template-homepage{% endblock %}
+{% load static wagtailcore_tags %}
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
+=======
+
+<p>Do you see me?</p>
+<p>Do you see me?</p>
+<p>Do you see me?</p>
+<p>Do you see me?</p>
+<p>Do you see me?</p>
+<p>Do you see me?</p>
+<p>Do you see me?</p>
+
+>>>>>>> 8242c49328c71176a3ff46e667a2fb8bcc2a53cc
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+{% for post in page.get_children %}
+  {% with post=post.specific %}
+    <div class="card text-center" style="width: 350px; float: left">
+        <a href="{% pageurl post %}">
+        {% image post.team_logo fill-320x240 class="card-img-top rounded img-thumbnail" %}</a>
+        <div class="card-block">
+        <h4 class="card-title">{{ post.team_name }}</h4>
+      </div>
+    </div>
+  {% endwith %}
+{% endfor %}
+{% endblock %}
