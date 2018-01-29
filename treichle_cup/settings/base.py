@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'search',
 
     'wagtailblocks_cards',
-    'wagtailmodelchooser',
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',
