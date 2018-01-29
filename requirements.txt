@@ -26,4 +26,5 @@ wagtail-modelchooser==0.3.1
 wagtailblocks-cards==2.0.1
 wagtailmodelchooser==0.2.0
 webencodings==0.5.1
+whitenoise==3.3.1
 Willow==1.0

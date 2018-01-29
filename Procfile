@@ -1,1 +1,1 @@
-web: gunicorn project_title.wsgi --log-file -
+web: gunicorn treichle_cup.wsgi --log-file -
