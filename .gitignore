@@ -15,6 +15,67 @@
 /Vagrantfile.local
 /docs/_build/
 /node_modules/
-/publichealth/static/libs/
 /mockup/assets/css/*.css
 os
+*.py[cod]
+local_settings.py
+out/*
+
+.idea/
+*.iml
+
+*.so
+
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+*.mo
+
+.project
+.pydevproject
+__pycache__/
+*$py.class
+
+# Distribution / packaging
+.Python
+downloads/
+
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+.hypothesis/
+
+*.pot
+
+# Django stuff:
+*.log
+
+# PyBuilder
+target/
+
+#Ipython Notebook
+.ipynb_checkpoints

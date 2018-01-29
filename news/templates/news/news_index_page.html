@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+{% block head-extra %}
+<style>
+/* Home Page sytling */
+.jasgrid{padding: 12px 0;}
+.box-item {
+    float: left;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.box-item img {
+    width: 100%;
+}
+.box-item a,span{color:#FFF;}
+
+.box-item .box-post span.meta {
+    font-family:  sans-serif;
+    font-size: 12px;
+    color: #fff;
+    margin-top: 15px;
+    display: block;
+}
+
+.box-item .box-post span.meta span {
+    margin-right: 15px;
+}
+
+.box-item .box-post {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+    padding: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.box-item .box-post h1..post-title {
+   font-size:10pt;
+}
+/* Home Page sytling */
+</style>
+{% endblock head-extra %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 jasgrid">
+                {% for news in page.specific.children %}
+                    <div class="col-md-12 jasgrid">
+                        <div class="box-item">
+                            <div class="box-post">
+                                <h1 class="post-title">
+                                    <a href="{{news.url}}">
+                                        {{ news.title }}
+                                    </a>
+                                </h1>
+                                {% if news.date_published %}
+                                <span class="meta">
+                                    <span><i class="fa fa-clock-o"></i> {{ news.date_published }}</span>
+                                </span>
+                                {% endif %}
+                            </div>
+                            {% image news.feed_image fill-1200x300 %}
+                        </div>
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
+</div> <!-- /container -->
+
+{% endblock %}

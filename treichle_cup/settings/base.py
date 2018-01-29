@@ -26,6 +26,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    'news',
     'team_rooster',
     'home',
     'search',
@@ -101,7 +102,12 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'tcDB',
+#     }
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

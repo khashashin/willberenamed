@@ -1,0 +1,23 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<!-- Gallery Template -->
+
+<div id="responsive" class="carousel-inner carousel-gallery slick" role="listbox">
+{% for block in page.gallery %}
+  {% for val in block.value %}
+		<div class="item row">
+      {% image val.image fill-1200x400 class='img-responsive' %}
+    </div>
+  {% endfor %}
+{% endfor %}
+</div>
+<div class="carousel-inner slider-nav">
+{% for block in page.gallery %}
+  {% for val in block.value %}
+		<div class="item">
+			{% image val.image fill-700x400 as entry_thumb %}
+			<image style="background-image:url({{ entry_thumb.url }})">
+		</div>
+  {% endfor %}
+{% endfor %}
+</div>

@@ -1,13 +1,13 @@
 $( document ).ready(function() {
   //  class add mouse hover
-  $('.custom-nav > a').hover(function(){
+  $('.custom-nav > a:not(:first)').hover(function(){
     $(this).next().show();
      // $(this).addClass('nav-hover');
   }, function(){
     $(this).next().hide();
      // $(this).removeClass('nav-hover');
   });
-  
+
   // Create two variable with the names of the months and days in an array
 	var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 	var dayNames= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]

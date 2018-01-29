@@ -29,6 +29,9 @@
             {% endwith %}
         {% endblock %}
     </title>
+            
+        {% block head-extra %}
+        {% endblock head-extra %}
   </head>
   <body class="sticky-header left-side-collapsed">
     <section>
@@ -39,7 +42,7 @@
 
           {% include 'header.html' %}
 
-          <div class="container" style="margin-top: 80px">
+          <div class="container-fluid" style="margin-top: 50px">
 
           {% block content %}
           {% endblock %}
