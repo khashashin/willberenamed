@@ -1,9 +1,10 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.db import models
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from wagtail.wagtailadmin.edit_handlers import (
+    FieldPanel,
     PageChooserPanel,
+    MultiFieldPanel,
 )
 
 from wagtail.wagtailcore.models import Page
@@ -11,41 +12,51 @@ from wagtail.wagtailcore.models import Page
 
 class HomePage(Page):
 
-    teams_page = models.ForeignKey(
+    matches_section_title = models.CharField(
+        null=True,
+        blank=True,
+        max_length=255,
+        help_text='Title to display above the next matches'
+    )
+    matches_section = models.ForeignKey(
         'wagtailcore.Page',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
         verbose_name='Choose ',
-        help_text='Choose a page to link to for the Team Rooster Page'
+        help_text='Choose a page to link to for the Matches Page'
     )
 
-    subpage_types = ['news.NewsPage']
+    news_section_title = models.CharField(
+        null=True,
+        blank=True,
+        max_length=255,
+        help_text='Title to display above the News section on Home page'
+    )
+    news_section = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text='Choose a page to link to for the News Page.',
+        verbose_name='News'
+    )
     parent_page_types = ['wagtailcore.Page']
 
-    content_panels = [
-        PageChooserPanel('teams_page'),
+    content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            MultiFieldPanel([
+                FieldPanel('matches_section_title'),
+                PageChooserPanel('matches_section'),
+                ]),
+            MultiFieldPanel([
+                FieldPanel('news_section_title'),
+                PageChooserPanel('news_section'),
+                ]),
+        ], heading="Featured homepage sections", classname="collapsible")
     ]
 
-    def get_news(self):
-        return news.NewsPage.objects.live().descendant_of(
-            self).order_by('-first_published_at')
-
-    def children(self):
-        return self.get_children().specific().live()
-
-    def paginate(self, request, *args):
-        page = request.GET.get('page')
-        paginator = Paginator(self.get_news(), 12)
-        try:
-            pages = paginator.page(page)
-        except PageNotAnInteger:
-            pages = paginator.page(1)
-        except EmptyPage:
-            pages = paginator.page(paginator.num_pages)
-        return pages
-
-    def get_context(self, request):
-        context = super(HomePage, self).get_context(request)
-        return context
+    def __str__(self):
+        return self.title
