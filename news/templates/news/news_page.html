@@ -12,7 +12,7 @@
 {% endif %}
     <h1>{{ page.title }}</h1>
 
-    <div class="intro">{{ page.intro }}</div>
+    <div class="intro">{{ page.intro|richtext }}</div>
     {% for block in page.body %}
       <p class="block-{{ block.block_type }}">
         {% include_block block %}
