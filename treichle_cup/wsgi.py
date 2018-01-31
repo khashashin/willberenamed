@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/
 from __future__ import absolute_import, unicode_literals
 
 import os
+from django.core.wsgi import get_wsgi_application
+
 # Handling Key Import Errors
 def get_env_variable(var_name):
     """ Get the environment variable or return exception """
@@ -20,11 +22,10 @@ def get_env_variable(var_name):
 
 locale_env = get_env_variable('IM_LOCALE')
 
-from django.core.wsgi import get_wsgi_application
 if locale_env == 'YES':
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "treichle_cup.settings.dev")
     application = get_wsgi_application()
 else:
     from dj_static import Cling
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "treichle_cup.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "treichle_cup.settings.production")
     application = Cling(get_wsgi_application())

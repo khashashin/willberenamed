@@ -2,7 +2,12 @@ from __future__ import absolute_import, unicode_literals
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from .base import *
 from django.core.exceptions import ImproperlyConfigured
+
+DEBUG = False
+
+env = os.environ.copy()
 # Handling Key Import Errors
 def get_env_variable(var_name):
     """ Get the environment variable or return exception """
@@ -12,13 +17,7 @@ def get_env_variable(var_name):
         error_msg = "Set the %s environment variable" % var_name
         raise ImproperlyConfigured(error_msg)
 
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_env_variable('SECRET_KEY')
-
-from .base import *
-
-DEBUG = False
 
 try:
     from .local import *
