@@ -59,7 +59,7 @@ class TeamRooster(Page):
     ]
 
     def __str__(self):
-        return self.team_name
+        return self.title
 
 
 # Create your models here.
