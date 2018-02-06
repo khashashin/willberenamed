@@ -4,7 +4,7 @@ from wagtail.contrib.modeladmin.options import (
     ModelAdmin, ModelAdminGroup, modeladmin_register)
 from . models import TeamRooster
 from news.models import NewsPage
-from matches.models import MatchPage
+# from matches.models import MatchPage
 
 class TeamRoosterModelAdmin(ModelAdmin):
     model = TeamRooster
@@ -25,10 +25,10 @@ class NewsModelAdmin(ModelAdmin):
     search_fields = ('title',)
 
 modeladmin_register(NewsModelAdmin)
-
-class MatchesModelAdmin(ModelAdmin):
-    model = MatchPage
-    list_display = ('team_1_color', 'team_1', 'team_1_score', 'team_2_score', 'team_2', 'team_2_color', 'starts_at')
-    list_filter = ('starts_at')
-
-modeladmin_register(MatchesModelAdmin)
+#
+# class MatchPageModelAdmin(ModelAdmin):
+#     model = MatchPage
+#     list_display = ('team_1_color', 'team_1', 'team_1_score', 'team_2_score', 'team_2', 'team_2_color', 'starts_at')
+#     list_filter = ('starts_at')
+#
+# modeladmin_register(MatchPageModelAdmin)
