@@ -20,7 +20,11 @@ class NewsModelAdmin(ModelAdmin):
     menu_icon = 'edit'
     menu_order = 300  # will put in 3rd place (000 being 1st, 100 2nd)
 
+modeladmin_register(NewsModelAdmin)
+
 class MatchesModelAdmin(ModelAdmin):
     model = MatchPage
+    list_display = ('team_1_color', 'team_1', 'team_1_score', 'team_2_score', 'team_2', 'team_2_color', 'starts_at')
+    list_filter = ('starts_at')
 
-modeladmin_register(NewsModelAdmin)
+modeladmin_register(MatchesModelAdmin)

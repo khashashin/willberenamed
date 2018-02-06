@@ -40,6 +40,7 @@ class MatchPage(Page):
 
 
     parent_page_types = ['Matches']
+    subpage_types = []
 
     content_panels = [
         FieldPanel('number', classname="6"),
