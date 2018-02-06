@@ -65,8 +65,6 @@ class TeamRooster(Page):
     def __str__(self):
         return self.title
 
-
-# Create your models here.
 class Teams(Page):
     introduction = models.TextField(
         help_text='Text to describe the page',
