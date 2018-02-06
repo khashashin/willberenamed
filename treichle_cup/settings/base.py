@@ -26,6 +26,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    'tournament',
+    'matches',
     'news',
     'team_rooster',
     'home',
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
     'storages',
+    'colorfield',
 
     'django.contrib.admin',
     'django.contrib.auth',
