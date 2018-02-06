@@ -28,6 +28,9 @@ class NewsPage(Page):
     date_published = models.DateField(
         "Date article published", blank=True, null=True
     )
+    last_modified = models.DateField(
+        "Date article modified", blank=True, auto_now=True
+    )
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True, blank=True,
