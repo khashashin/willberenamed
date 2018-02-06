@@ -10,7 +10,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailcore', '0041_auto_20180206_1054'),
+        ('wagtailcore', '0040_page_draft_title'),
         ('wagtailforms', '0003_capitalizeverbose'),
         ('team_rooster', '0009_auto_20180128_1156'),
         ('wagtailredirects', '0005_capitalizeverbose'),
