@@ -43,6 +43,23 @@ class HomePage(Page):
         help_text='Choose a page to link to for the News Page.',
         verbose_name='News'
     )
+
+
+    presentation_screen_section_title = models.CharField(
+        null=True,
+        blank=True,
+        max_length=255,
+        help_text='Title to display above the News section on Home page'
+    )
+    presentation_screen_section = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text='Choose a page to link to for the Presentation Screen Page.',
+        verbose_name='Presentation Screen'
+    )
     parent_page_types = ['wagtailcore.Page']
 
     content_panels = Page.content_panels + [
@@ -54,6 +71,10 @@ class HomePage(Page):
             MultiFieldPanel([
                 FieldPanel('news_section_title'),
                 PageChooserPanel('news_section'),
+                ]),
+            MultiFieldPanel([
+                FieldPanel('presentation_screen_section_title'),
+                PageChooserPanel('presentation_screen_section'),
                 ]),
         ], heading="Featured homepage sections", classname="collapsible")
     ]
