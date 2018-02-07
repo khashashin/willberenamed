@@ -5,15 +5,61 @@ from wagtail.contrib.modeladmin.options import (
 from . models import TeamRooster
 from news.models import NewsPage
 # from matches.models import MatchPage
+from tournament.models import (
+    GroupstageTournamentModel, FinalphaseTournamentModel,
+    TournamentPage, ScreencastPage)
 
 class TeamRoosterModelAdmin(ModelAdmin):
     model = TeamRooster
     menu_label = 'Team Manager'
     menu_icon = 'group'
-    menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
     search_fields = ('title',)
 
-modeladmin_register(TeamRoosterModelAdmin)
+class TournamentModelAdmin(ModelAdmin):
+    model = TournamentPage
+    menu_label = 'Tournament'
+    menu_icon = 'fa-trophy'
+    list_display = ('starts_at', 'ends_at')
+    list_per_page = 5
+    search_fields = ('title', 'starts_at')
+
+class GroupstageModelAdmin(ModelAdmin):
+    model = GroupstageTournamentModel
+    menu_label = 'Gruppenphase'
+    menu_icon = 'fa-user-times'
+    list_display = ('number', 'starts_at',
+        'team_1_dress', 'team_1', 'team_1_total_score', 'team_1_total_points',
+        'team_2_total_points', 'team_2_total_score', 'team_2', 'team_2_dress')
+    list_per_page = 10
+    list_filter = ('number', 'starts_at')
+    search_fields = ('number', 'starts_at')
+
+class FinalstageModelAdmin(ModelAdmin):
+    model = FinalphaseTournamentModel
+    menu_label = 'Finalphase'
+    menu_icon = 'fa-user-plus'
+    search_fields = ('number', 'starts_at')
+
+class ScreencastPageModelAdmin(ModelAdmin):
+    model = ScreencastPage
+    menu_label = 'Presentation Screen'
+    menu_icon = 'fa-desktop'
+
+class TreichleCupModelAdmin(ModelAdminGroup):
+    menu_label = 'Treichle-Cup'
+    menu_icon = 'folder-open-inverse'
+    menu_order = 200
+    items = (
+        TeamRoosterModelAdmin,
+        TournamentModelAdmin,
+        GroupstageModelAdmin,
+        FinalstageModelAdmin,
+        ScreencastPageModelAdmin
+    )
+
+modeladmin_register(TreichleCupModelAdmin)
+
+
 
 class NewsModelAdmin(ModelAdmin):
     model = NewsPage
@@ -25,10 +71,3 @@ class NewsModelAdmin(ModelAdmin):
     search_fields = ('title',)
 
 modeladmin_register(NewsModelAdmin)
-#
-# class MatchPageModelAdmin(ModelAdmin):
-#     model = MatchPage
-#     list_display = ('team_1_color', 'team_1', 'team_1_score', 'team_2_score', 'team_2', 'team_2_color', 'starts_at')
-#     list_filter = ('starts_at')
-#
-# modeladmin_register(MatchPageModelAdmin)
