@@ -10,6 +10,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     PageChooserPanel
 )
 from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.blocks import CharBlock, ChoiceBlock, IntegerBlock, ListBlock
 from colorfield.fields import ColorField
@@ -96,7 +97,7 @@ class GroupstageTournamentModel(models.Model):
 
 class GroupstageTournamentRelationship(Orderable, models.Model):
     page = ParentalKey('TournamentPage',
-        related_name='groupstage_relationship')
+        related_name='groupstage_tournament_relationship')
     match = models.ForeignKey('GroupstageTournamentModel',
         related_name='match_tournament_relationship')
     panels = [
@@ -104,7 +105,7 @@ class GroupstageTournamentRelationship(Orderable, models.Model):
     ]
 class GroupstageScreencastRelationship(Orderable, models.Model):
     page = ParentalKey('ScreencastPage',
-        related_name='groupstage_relationship')
+        related_name='groupstage_screencast_relationship')
     match = models.ForeignKey('GroupstageTournamentModel',
         default="", related_name='match_screen_relationship')
     panels = [
@@ -188,7 +189,7 @@ class TournamentPage(Page):
         FieldPanel('starts_at'),
         FieldPanel('ends_at'),
         InlinePanel(
-            'groupstage_relationship', label="Goups",
+            'groupstage_tournament_relationship', label="Goups",
             panels=None, min_num=1),
         InlinePanel(
             'final_phase_relationship', label="Finals",
@@ -209,7 +210,7 @@ class ScreencastPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('title'),
         InlinePanel(
-            'groupstage_relationship', label="Playing First",
+            'groupstage_screencast_relationship', label="Playing First",
             panels=None, max_num=1),
         InlinePanel(
             'final_phase_relationship', label="Playing Next",
