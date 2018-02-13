@@ -6,22 +6,13 @@ from . models import TeamRooster
 from news.models import NewsPage
 # from matches.models import MatchPage
 from tournament.models import (
-    GroupstageTournamentModel, FinalphaseTournamentModel,
-    TournamentPage, ScreencastPage)
+    GroupstageTournamentModel, ScreencastPage)
 
 class TeamRoosterModelAdmin(ModelAdmin):
     model = TeamRooster
     menu_label = 'Team Manager'
     menu_icon = 'group'
     search_fields = ('title',)
-
-class TournamentModelAdmin(ModelAdmin):
-    model = TournamentPage
-    menu_label = 'Tournament'
-    menu_icon = 'fa-trophy'
-    list_display = ('starts_at', 'ends_at')
-    list_per_page = 5
-    search_fields = ('title', 'starts_at')
 
 class GroupstageModelAdmin(ModelAdmin):
     model = GroupstageTournamentModel
@@ -32,12 +23,6 @@ class GroupstageModelAdmin(ModelAdmin):
         'team_2_total_points', 'team_2_total_score', 'team_2', 'team_2_dress')
     list_per_page = 10
     list_filter = ('number', 'starts_at')
-    search_fields = ('number', 'starts_at')
-
-class FinalstageModelAdmin(ModelAdmin):
-    model = FinalphaseTournamentModel
-    menu_label = 'Finalphase'
-    menu_icon = 'fa-user-plus'
     search_fields = ('number', 'starts_at')
 
 class ScreencastPageModelAdmin(ModelAdmin):
@@ -51,9 +36,7 @@ class TreichleCupModelAdmin(ModelAdminGroup):
     menu_order = 200
     items = (
         TeamRoosterModelAdmin,
-        TournamentModelAdmin,
         GroupstageModelAdmin,
-        FinalstageModelAdmin,
         ScreencastPageModelAdmin
     )
 
