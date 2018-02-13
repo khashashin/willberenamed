@@ -21,13 +21,15 @@ list-style-type: none;
 }
 .gofull {
   color: black;
-  padding: 0;
+  padding: 3px;
   margin: 0;
 }
 .gofull:hover {
   color: #ffdbdb;
-  padding: 0;
+  padding: 3px;
   margin: 0;
+  border: 1px solid #ffdbdb;
+  border-radius: 4px;
 }
 #fullscreen {
   width: 100%;
@@ -89,3 +91,6 @@ margin-left: 9em;
 float: right;
 margin-right: 9em;
 }
+.first_team,
+.second_team {
+  font-size: 28px;

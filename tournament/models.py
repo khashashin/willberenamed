@@ -22,16 +22,16 @@ from team_rooster.models import TeamRooster
 @register_snippet
 class GroupstageTournamentModel(ClusterableModel):
     number = models.PositiveSmallIntegerField(
-        default="", verbose_name="Match №:")
-    starts_at = models.DateTimeField(default="",)
+        verbose_name="Match №:")
+    starts_at = models.DateTimeField()
     # Team 1
     team_1 = models.ForeignKey(
         TeamRooster,
-        null=True, default="", verbose_name='Erste Team',
+        null=True, verbose_name='Erste Team',
         on_delete=models.SET_NULL,
         related_name="+",
     )
-    team_1_dress = ColorField(default='#ff0000', blank=True, verbose_name='Dress')
+    team_1_dress = ColorField(blank=True, verbose_name='Dress')
     team_1_first_halftime_score = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Resultat 1. HZ')
     team_1_first_halftime_point = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Punkte 1. HZ')
     team_1_second_halftime_score = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Resultat 2. HZ')
@@ -44,11 +44,11 @@ class GroupstageTournamentModel(ClusterableModel):
     # Team 2
     team_2 = models.ForeignKey(
         TeamRooster,
-        null=True, default="", verbose_name='Zweite Team',
+        null=True, verbose_name='Zweite Team',
         on_delete=models.SET_NULL,
         related_name="+",
     )
-    team_2_dress = ColorField(default='#ff0000', blank=True, verbose_name='Dress')
+    team_2_dress = ColorField(blank=True, verbose_name='Dress')
     team_2_first_halftime_score = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Resultat 1. HZ')
     team_2_first_halftime_point = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Punkte 1. HZ')
     team_2_second_halftime_score = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Resultat 2. HZ')
