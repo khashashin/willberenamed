@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('team_rooster', '0014_auto_20180205_1356'),
-        ('wagtailcore', '0041_auto_20180206_1054'),
+        ('wagtailcore', '0040_page_draft_title'),
     ]
 
     operations = [
