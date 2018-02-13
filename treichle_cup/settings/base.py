@@ -27,7 +27,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     'tournament',
-    'matches',
     'news',
     'team_rooster',
     'home',
