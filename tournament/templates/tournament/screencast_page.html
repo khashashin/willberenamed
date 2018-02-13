@@ -1,0 +1,96 @@
+{% load static wagtailcore_tags wagtailuserbar wagtailimages_tags navigation %}
+{% get_site_root as site_root %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/presentation.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+  <!-- Webfonts -->
+  <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+<body>
+  <div class="fill">
+    <ul id="buttons">
+      <li><a id="btnFullscreen"><i class="gofull fa fa-expand fa-4x"></i></a></li>
+      <li><a href="{% pageurl site_root %}"><i class="gofull fa fa-home fa-5x"></i></a></li>
+    </ul>
+  {% for spiel in page.matches %}
+    {% if forloop.first == forloop.last %}
+    <div id="fullscreen">
+      <ul class="ulup">
+        <li class="first_team">{% image spiel.team_1.team_logo fill-400x250 %}</li>
+        <li class="first_team_score">{{ spiel.team_1_total_score }}</li>
+        <li class="colons">:</li>
+        <li class="second_team_score">{{ spiel.team_2_total_score }}</li>
+        <li class="second_team">{% image spiel.team_2.team_logo fill-400x250 %}</li>
+      </ul>
+    </div>
+    {% endif %}
+  {% endfor %}
+  {% for spiel in page.matches %}
+  {% if forloop.first and forloop.last %}
+  {% else %}
+    {% if forloop.counter == 1 %}
+    <div id="match1">
+      <ul class="ulup">
+        <li class="first_team">{% image spiel.team_1.team_logo fill-400x250 %}</li>
+        <li class="first_team_score">{{ spiel.team_1_total_score }}</li>
+        <li class="colons">:</li>
+        <li class="second_team_score">{{ spiel.team_2_total_score }}</li>
+        <li class="second_team">{% image spiel.team_2.team_logo fill-400x250 %}</li>
+      </ul>
+    </div>
+    {% endif %}
+    {% if forloop.counter == 2 %}
+     <div id="match2">
+       <ul class="uldown">
+        <li class="first_team">{% image spiel.team_1.team_logo fill-400x250 %}</li>
+        <li class="">
+          <ul class="innerul">
+            <li class=""><h2>Next Game</h2></li>
+            <li class="">{{spiel.starts_at}}</li>
+            <li class="">13:45</li>
+          </ul>
+        </li>
+        <li class="second_team">{% image spiel.team_2.team_logo fill-400x250 %}</li>
+      </ul>
+    </div>
+    {% endif %}
+    {% endif %}
+  {% endfor %}
+  </div>
+<script type="text/javascript">
+  function toggleFullscreen(elem) {
+  elem = elem || document.documentElement;
+    if (!document.fullscreenElement && !document.mozFullScreenElement &&
+    !document.webkitFullscreenElement && !document.msFullscreenElement) {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+      }
+    }
+  }
+
+  document.getElementById('btnFullscreen').addEventListener('click', function() {
+  toggleFullscreen();
+  });
+</script>
+</body>
