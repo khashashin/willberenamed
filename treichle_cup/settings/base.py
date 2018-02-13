@@ -27,7 +27,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     'tournament',
-    'matches',
     'news',
     'team_rooster',
     'home',
@@ -51,6 +50,7 @@ INSTALLED_APPS = [
     'taggit',
     'storages',
     'colorfield',
+    'wagtailfontawesome',
 
     'django.contrib.admin',
     'django.contrib.auth',
