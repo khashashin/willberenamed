@@ -82,7 +82,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='groupstagetournamentmodel',
             name='team_2_dress',
-            field=colorfield.fields.ColorField(blank=True, default='#ff0000', max_length=18, verbose_name='Dress'),
+            field=colorfield.fields.ColorField(blank=True, max_length=18, verbose_name='Dress'),
         ),
         migrations.AlterField(
             model_name='groupstagetournamentmodel',
