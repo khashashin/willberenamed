@@ -32,14 +32,14 @@ class GroupstageTournamentModel(ClusterableModel):
         related_name="+",
     )
     team_1_dress = ColorField(blank=True, verbose_name='Dress')
-    team_1_first_halftime_score = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Resultat 1. HZ')
-    team_1_first_halftime_point = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Punkte 1. HZ')
-    team_1_second_halftime_score = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Resultat 2. HZ')
-    team_1_second_halftime_point = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Punkte 2. HZ')
-    team_1_shootout_score = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Resultat Shootout')
-    team_1_shootout_point = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Schootout Punkte')
-    team_1_total_score = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Resultat Total')
-    team_1_total_points = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Punkte Total')
+    team_1_first_halftime_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat 1. HZ')
+    team_1_first_halftime_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte 1. HZ')
+    team_1_second_halftime_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat 2. HZ')
+    team_1_second_halftime_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte 2. HZ')
+    team_1_shootout_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat Shootout')
+    team_1_shootout_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Schootout Punkte')
+    team_1_total_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat Total')
+    team_1_total_points = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte Total')
 
     # Team 2
     team_2 = models.ForeignKey(
@@ -49,14 +49,14 @@ class GroupstageTournamentModel(ClusterableModel):
         related_name="+",
     )
     team_2_dress = ColorField(blank=True, verbose_name='Dress')
-    team_2_first_halftime_score = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Resultat 1. HZ')
-    team_2_first_halftime_point = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Punkte 1. HZ')
-    team_2_second_halftime_score = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Resultat 2. HZ')
-    team_2_second_halftime_point = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Punkte 2. HZ')
-    team_2_shootout_score = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Resultat Shootout')
-    team_2_shootout_point = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Schootout Punkte')
-    team_2_total_score = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Resultat Total')
-    team_2_total_points = models.PositiveSmallIntegerField(blank=True, default="0", verbose_name='Punkte Total')
+    team_2_first_halftime_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat 1. HZ')
+    team_2_first_halftime_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte 1. HZ')
+    team_2_second_halftime_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat 2. HZ')
+    team_2_second_halftime_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte 2. HZ')
+    team_2_shootout_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat Shootout')
+    team_2_shootout_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Schootout Punkte')
+    team_2_total_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat Total')
+    team_2_total_points = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte Total')
 
     panels = [
         FieldPanel('number', classname="col6"),
