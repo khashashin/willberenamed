@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='groupstagetournamentmodel',
             name='team_1_dress',
-            field=colorfield.fields.ColorField(blank=True, default='#ff0000', max_length=18, verbose_name='Dress'),
+            field=colorfield.fields.ColorField(blank=True, max_length=18, verbose_name='Dress'),
         ),
         migrations.AlterField(
             model_name='groupstagetournamentmodel',
@@ -77,7 +77,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='groupstagetournamentmodel',
             name='team_2',
-            field=models.ForeignKey(default='', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='team_rooster.TeamRooster', verbose_name='Zweite Team'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='team_rooster.TeamRooster', verbose_name='Zweite Team'),
         ),
         migrations.AlterField(
             model_name='groupstagetournamentmodel',
