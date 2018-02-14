@@ -17,17 +17,17 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='groupstagetournamentmodel',
             name='number',
-            field=models.PositiveSmallIntegerField(default='', verbose_name='Match №:'),
+            field=models.PositiveSmallIntegerField(verbose_name='Match №:'),
         ),
         migrations.AlterField(
             model_name='groupstagetournamentmodel',
             name='starts_at',
-            field=models.DateTimeField(default=''),
+            field=models.DateTimeField(),
         ),
         migrations.AlterField(
             model_name='groupstagetournamentmodel',
             name='team_1',
-            field=models.ForeignKey(default='', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='team_rooster.TeamRooster', verbose_name='Erste Team'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='team_rooster.TeamRooster', verbose_name='Erste Team'),
         ),
         migrations.AlterField(
             model_name='groupstagetournamentmodel',
