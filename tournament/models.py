@@ -16,6 +16,9 @@ from wagtail.wagtailcore.blocks import CharBlock, ChoiceBlock, IntegerBlock, Lis
 from colorfield.fields import ColorField
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from django.contrib.auth.models import User
 
 from team_rooster.models import TeamRooster
 
@@ -84,6 +87,13 @@ class GroupstageTournamentModel(ClusterableModel):
         FieldPanel('team_2_shootout_point', classname="col3"),
         FieldPanel('team_2_total_points', classname="col3"),
     ]
+
+    @receiver(pre_save, sender='tournament.GroupstageTournamentModel')
+    def my_callback(sender, instance, *args, **kwargs):
+        instance.team_1_total_score = instance.team_1_first_halftime_score + instance.team_1_second_halftime_score + instance.team_1_shootout_score
+        instance.team_2_total_score = instance.team_2_first_halftime_score + instance.team_2_second_halftime_score + instance.team_2_shootout_score
+        instance.team_1_total_points = instance.team_1_first_halftime_point + instance.team_1_second_halftime_point + instance.team_1_shootout_point
+        instance.team_2_total_points = instance.team_2_first_halftime_point + instance.team_2_second_halftime_point + instance.team_2_shootout_point
 
     def __str__(self):
         return 'Match №:{} Begint: {} {} vs {}'.format(self.number, self.starts_at, self.team_1, self.team_2)
