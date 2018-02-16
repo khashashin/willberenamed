@@ -106,3 +106,9 @@ margin-right: 9em;
   background-color: white;
   height: 250px !important;
 }
+.lastgame {
+  font-family: arial;
+  font-size: 100px;
+  color: white;
+  font-weight: bold;
+}

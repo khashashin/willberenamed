@@ -17,6 +17,7 @@
       <li><a id="btnFullscreen"><i class="gofull fa fa-expand fa-3x"></i></a></li>
       <li><a href="{% pageurl site_root %}"><i class="gofull fa fa-home fa-3x"></i></a></li>
     </ul>
+  {% if page.matches|length >= 1 %}
   {% for spiel in page.matches %}
     {% if forloop.first == forloop.last %}
     <div id="fullscreen">
@@ -61,6 +62,13 @@
     {% endif %}
     {% endif %}
   {% endfor %}
+  {% else %}
+    <div id="fullscreen">
+      <div class="ulup">
+        <p class="lastgame">Heute wird es keine Spiele mehr geben</p>
+      </div>
+    </div>
+  {% endif %}
   </div>
 <script type="text/javascript">
   function toggleFullscreen(elem) {
