@@ -73,20 +73,21 @@
 <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script type="text/javascript">
-// $(document).ready(function() {
-//   setInterval(function(){
-//     $.ajax({
-//       type: "GET",
-//       url: {% pageurl page %},
-//       data: {},
-//       success: function(data) {
-//         console.log(data);
-//         // $(".first_team_score").contents()[0].textContent = data.team_1_total_score;
-//         // $(".second_team_score").contents()[0].textContent = data.team_2_total_score;
-//       }
-//     })
-//   }, 10000);
-// });
+$(document).ready(function() {
+  setInterval(function(){
+    $.ajax({
+      type: "GET",
+      url: {% pageurl page %},
+      dataType: 'json',
+      success: function(data) {
+        $("#match1 .first_team").contents()[0].textContent = data[0]["team_1_name"];
+        $(".first_team_score").contents()[0].textContent = data[0]["team_1_score"];
+        $("#match1 .second_team").contents()[0].textContent = data[0]["team_2_name"];
+        $(".second_team_score").contents()[0].textContent = data[0]["team_2_score"];
+      }
+    })
+  }, 10000);
+});
   function toggleFullscreen(elem) {
   elem = elem || document.documentElement;
     if (!document.fullscreenElement && !document.mozFullScreenElement &&
