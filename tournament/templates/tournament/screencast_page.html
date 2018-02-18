@@ -80,13 +80,13 @@ $(document).ready(function() {
       url: {% pageurl page %},
       dataType: 'json',
       success: function(data) {
-        $("#match1 .first_team").contents()[0].textContent = data[0]["team_1_name"];
+        $("#match1 .first_team p").contents()[0].textContent = data[0]["team_1_name"];
         $(".first_team_score").contents()[0].textContent = data[0]["team_1_score"];
-        $("#match1 .second_team").contents()[0].textContent = data[0]["team_2_name"];
+        $("#match1 .second_team p").contents()[0].textContent = data[0]["team_2_name"];
         $(".second_team_score").contents()[0].textContent = data[0]["team_2_score"];
       }
     })
-  }, 10000);
+  }, 20000);
 });
   function toggleFullscreen(elem) {
   elem = elem || document.documentElement;
