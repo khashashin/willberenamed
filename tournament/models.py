@@ -19,6 +19,7 @@ from wagtail.wagtailsnippets.models import register_snippet
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 import json
+from django.http import HttpResponse
 
 
 from team_rooster.models import TeamRooster
@@ -128,9 +129,20 @@ class ScreencastPage(Page):
         ]
 
         return matches
-    # 
-    # def serve(self, request):
-    #     if request.is_ajax():
-    #
-    #     else:
-    #         return super(ScreencastPage, self).serve(request)
+
+    def serve(self, request):
+        if request.is_ajax():
+            result = [
+                {
+                    'team_1_name': match.team_1.title,
+                    'team_1_score': match.team_1_total_score,
+                    'team_2_name': match.team_2.title,
+                    # 'team_2_logo': match.team_2.team_logo
+                    'team_2_score': match.team_2_total_score,
+                }
+                for match in self.matches()
+            ]
+            json_output = json.dumps(result)
+            return HttpResponse(json_output)
+        else:
+            return super(ScreencastPage, self).serve(request)
