@@ -70,7 +70,23 @@
     </div>
   {% endif %}
   </div>
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script type="text/javascript">
+// $(document).ready(function() {
+//   setInterval(function(){
+//     $.ajax({
+//       type: "GET",
+//       url: {% pageurl page %},
+//       data: {},
+//       success: function(data) {
+//         console.log(data);
+//         // $(".first_team_score").contents()[0].textContent = data.team_1_total_score;
+//         // $(".second_team_score").contents()[0].textContent = data.team_2_total_score;
+//       }
+//     })
+//   }, 10000);
+// });
   function toggleFullscreen(elem) {
   elem = elem || document.documentElement;
     if (!document.fullscreenElement && !document.mozFullScreenElement &&

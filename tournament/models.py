@@ -18,7 +18,8 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from django.contrib.auth.models import User
+import json
+
 
 from team_rooster.models import TeamRooster
 
@@ -127,3 +128,9 @@ class ScreencastPage(Page):
         ]
 
         return matches
+    # 
+    # def serve(self, request):
+    #     if request.is_ajax():
+    #
+    #     else:
+    #         return super(ScreencastPage, self).serve(request)
