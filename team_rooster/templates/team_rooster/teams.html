@@ -1,13 +1,29 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+{% block head-extra %}
+<style>
+.logo {
+  height: 250px !important;
+  min-width: 400px !important;
+}
+.logo_bg {
+  background-color: white;
+  height: 250px !important;
+  padding-left: 10px;
+}
+.rounded {
+  border-color: black;
+}
+</style>
+{% endblock head-extra %}
 
 {% block content %}
 {% for post in page.get_children %}
   {% with post=post.specific %}
-    <div class="card text-center" style="width: 350px; float: left">
-        <a href="{% pageurl post %}">
-        {% image post.team_logo fill-320x240 class="card-img-top rounded img-thumbnail" %}</a>
+    <div class="card text-center" style="float: left">
+        <a class="logo_bg" href="{% pageurl post %}">
+        {% image post.team_logo width-400 class="card-img-top logo rounded img-thumbnail" %}</a>
         <div class="card-block">
         <h4 class="card-title">{{ post.team_name }}</h4>
       </div>
