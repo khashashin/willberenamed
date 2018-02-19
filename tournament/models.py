@@ -132,16 +132,19 @@ class ScreencastPage(Page):
 
     def serve(self, request):
         if request.is_ajax():
-            result = [
-                {
+            result = []
+            for match in self.matches():
+                team_1_logo = match.team_1.team_logo.get_rendition('width-400')
+                team_2_logo = match.team_2.team_logo.get_rendition('width-400')
+                result.append({
                     'team_1_name': match.team_1.title,
                     'team_1_score': match.team_1_total_score,
+                    'team_1_logo': team_1_logo.url,
                     'team_2_name': match.team_2.title,
-                    # 'team_2_logo': match.team_2.team_logo
                     'team_2_score': match.team_2_total_score,
-                }
-                for match in self.matches()
-            ]
+                    'team_2_logo': team_2_logo.url,
+                })
+
             json_output = json.dumps(result)
             return HttpResponse(json_output)
         else:
