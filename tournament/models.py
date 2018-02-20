@@ -92,10 +92,35 @@ class GroupstageTournamentModel(ClusterableModel):
 
     @receiver(pre_save, sender='tournament.GroupstageTournamentModel')
     def my_callback(sender, instance, *args, **kwargs):
+        # Point for first half time
+        if instance.team_1_first_halftime_score > instance.team_2_first_halftime_score:
+            instance.team_1_first_halftime_point == 1
+        elif instance.team_2_first_halftime_score > instance.team_1_first_halftime_score:
+            instance.team_2_first_halftime_point == 1
+        elif instance.team_2_first_halftime_score == instance.team_1_first_halftime_score:
+            instance.team_2_first_halftime_point == 1
+            instance.team_1_first_halftime_point == 1
+        # Point for second half time
+        if instance.team_1_second_halftime_score > instance.team_2_second_halftime_score:
+            instance.team_1_second_halftime_point == 1
+        elif instance.team_2_second_halftime_score > instance.team_1_second_halftime_score:
+            instance.team_2_second_halftime_point == 1
+        elif instance.team_2_second_halftime_score == instance.team_1_second_halftime_score:
+            instance.team_2_second_halftime_point == 1
+            instance.team_1_second_halftime_point == 1
+        # Point for Shootout
+        if instance.team_1_shootout_score > instance.team_2_shootout_score:
+            instance.team_1_shootout_point == 1
+        elif instance.team_2_shootout_score > instance.team_1_shootout_score:
+            instance.team_2_shootout_point == 1
+        elif instance.team_1_shootout_score == instance.team_2_shootout_score:
+            instance.team_1_shootout_point == 1
+            instance.team_2_shootout_point == 1
         instance.team_1_total_score = instance.team_1_first_halftime_score + instance.team_1_second_halftime_score + instance.team_1_shootout_score
         instance.team_2_total_score = instance.team_2_first_halftime_score + instance.team_2_second_halftime_score + instance.team_2_shootout_score
         instance.team_1_total_points = instance.team_1_first_halftime_point + instance.team_1_second_halftime_point + instance.team_1_shootout_point
         instance.team_2_total_points = instance.team_2_first_halftime_point + instance.team_2_second_halftime_point + instance.team_2_shootout_point
+
 
     def __str__(self):
         return 'Match №:{} Begint: {} {} vs {}'.format(self.number, self.starts_at, self.team_1, self.team_2)
