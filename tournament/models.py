@@ -20,6 +20,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 import json
 from django.http import HttpResponse
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 from team_rooster.models import TeamRooster
@@ -136,7 +137,11 @@ class ScreencastPage(Page):
             for match in self.matches():
                 team_1_logo = match.team_1.team_logo.get_rendition('width-400')
                 team_2_logo = match.team_2.team_logo.get_rendition('width-400')
+                beginnt_date = json.dumps(match.starts_at.date().strftime("%d-%m-%Y"), cls=DjangoJSONEncoder)
+                beginnt_zeit = json.dumps(match.starts_at.time().strftime("%H:%M"), cls=DjangoJSONEncoder)
                 result.append({
+                    'beginnt_date': beginnt_date,
+                    'beginnt_zeit': beginnt_zeit,
                     'team_1_name': match.team_1.title,
                     'team_1_score': match.team_1_total_score,
                     'team_1_logo': team_1_logo.url,
