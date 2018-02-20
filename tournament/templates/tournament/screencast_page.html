@@ -80,7 +80,6 @@ $(document).ready(function() {
       url: {% pageurl page %},
       dataType: 'json',
       success: function(data) {
-        console.log(data);
         // Playing First
         $(".matchflex .first_team img").attr('src', data[0]["team_1_logo"]);
         $(".matchflex .first_team p").contents()[0].textContent = data[0]["team_1_name"];
@@ -93,6 +92,8 @@ $(document).ready(function() {
         $("#match2 .first_team p").contents()[0].textContent = data[1]["team_1_name"];
         $("#match2 .second_team img").attr('src', data[1]["team_2_logo"]);
         $("#match2 .second_team p").contents()[0].textContent = data[1]["team_2_name"];
+        $("#match2 .data_text p").contents()[0].textContent = data[1]["beginnt_date"].toString().replace(/[""]+/g, '');
+        $("#match2 .time_text p").contents()[0].textContent = data[1]["beginnt_zeit"].toString().replace(/[""]+/g, '');
       }
     })
   }, 30000);
