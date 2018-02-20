@@ -23,7 +23,7 @@ from django.http import HttpResponse
 from django.forms.utils import pretty_name
 from django.utils.html import format_html
 from wagtail.wagtailadmin.edit_handlers import EditHandler
-
+from django.core.serializers.json import DjangoJSONEncoder
 
 from team_rooster.models import TeamRooster
 
@@ -195,16 +195,23 @@ class ScreencastPage(Page):
 
     def serve(self, request):
         if request.is_ajax():
-            result = [
-                {
+            result = []
+            for match in self.matches():
+                team_1_logo = match.team_1.team_logo.get_rendition('width-400')
+                team_2_logo = match.team_2.team_logo.get_rendition('width-400')
+                beginnt_date = json.dumps(match.starts_at.date().strftime("%d-%m-%Y"), cls=DjangoJSONEncoder)
+                beginnt_zeit = json.dumps(match.starts_at.time().strftime("%H:%M"), cls=DjangoJSONEncoder)
+                result.append({
+                    'beginnt_date': beginnt_date,
+                    'beginnt_zeit': beginnt_zeit,
                     'team_1_name': match.team_1.title,
                     'team_1_score': match.team_1_total_score,
+                    'team_1_logo': team_1_logo.url,
                     'team_2_name': match.team_2.title,
-                    # 'team_2_logo': match.team_2.team_logo
                     'team_2_score': match.team_2_total_score,
-                }
-                for match in self.matches()
-            ]
+                    'team_2_logo': team_2_logo.url,
+                })
+
             json_output = json.dumps(result)
             return HttpResponse(json_output)
         else:

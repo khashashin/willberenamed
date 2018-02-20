@@ -11,6 +11,7 @@
   <!-- Webfonts -->
   <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300' rel='stylesheet' type='text/css'>
   <link href='//fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+  <link rel="shortcut icon" href="{% static 'wisli.ico' %}" type="image/x-icon">
 <body>
   <div class="fill">
     <ul id="buttons">
@@ -20,7 +21,7 @@
   {% if page.matches|length >= 1 %}
   {% for spiel in page.matches %}
     {% if forloop.first == forloop.last %}
-    <div id="fullscreen">
+    <div id="fullscreen" class="matchflex">
       <ul class="ulup">
         <li class="logo_bg first_team">{% image spiel.team_1.team_logo width-400 class="logo" %}<p>{{spiel.team_1.title}}</p></li>
         <li class="first_team_score">{{ spiel.team_1_total_score }}</li>
@@ -35,7 +36,7 @@
   {% if forloop.first and forloop.last %}
   {% else %}
     {% if forloop.counter == 1 %}
-    <div id="match1">
+    <div id="match1" class="matchflex">
       <ul class="ulup">
         <li class="logo_bg first_team">{% image spiel.team_1.team_logo width-400 class="logo" %}<p>{{spiel.team_1.title}}</p></li>
         <li class="first_team_score">{{ spiel.team_1_total_score }}</li>
@@ -52,8 +53,8 @@
         <li class="">
           <ul class="innerul">
             <li class=""><h2>Next Game</h2></li>
-            <li class=""><p>{{spiel.starts_at|date:'d-m-Y'}}</p></li>
-            <li class=""><p>{{spiel.starts_at|date:'H:i'}}</p></li>
+            <li class="data_text"><p>{{spiel.starts_at|date:'d-m-Y'}}</p></li>
+            <li class="time_text"><p>{{spiel.starts_at|date:'H:i'}}</p></li>
           </ul>
         </li>
         <li class="logo_bg second_team">{% image spiel.team_2.team_logo width-400 class="logo" %}<p>{{spiel.team_2.title}}</p></li>
@@ -80,13 +81,23 @@ $(document).ready(function() {
       url: {% pageurl page %},
       dataType: 'json',
       success: function(data) {
-        $("#match1 .first_team").contents()[0].textContent = data[0]["team_1_name"];
+        // Playing First
+        $(".matchflex .first_team img").attr('src', data[0]["team_1_logo"]);
+        $(".matchflex .first_team p").contents()[0].textContent = data[0]["team_1_name"];
         $(".first_team_score").contents()[0].textContent = data[0]["team_1_score"];
-        $("#match1 .second_team").contents()[0].textContent = data[0]["team_2_name"];
+        $(".matchflex .second_team img").attr('src', data[0]["team_2_logo"]);
+        $(".matchflex .second_team p").contents()[0].textContent = data[0]["team_2_name"];
         $(".second_team_score").contents()[0].textContent = data[0]["team_2_score"];
+        // Playing Second
+        $("#match2 .first_team img").attr('src', data[1]["team_1_logo"]);
+        $("#match2 .first_team p").contents()[0].textContent = data[1]["team_1_name"];
+        $("#match2 .second_team img").attr('src', data[1]["team_2_logo"]);
+        $("#match2 .second_team p").contents()[0].textContent = data[1]["team_2_name"];
+        $("#match2 .data_text p").contents()[0].textContent = data[1]["beginnt_date"].toString().replace(/[""]+/g, '');
+        $("#match2 .time_text p").contents()[0].textContent = data[1]["beginnt_zeit"].toString().replace(/[""]+/g, '');
       }
     })
-  }, 10000);
+  }, 30000);
 });
   function toggleFullscreen(elem) {
   elem = elem || document.documentElement;
