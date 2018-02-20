@@ -20,9 +20,47 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 import json
 from django.http import HttpResponse
+from django.forms.utils import pretty_name
+from django.utils.html import format_html
+from wagtail.wagtailadmin.edit_handlers import EditHandler
 
 
 from team_rooster.models import TeamRooster
+
+# Read only panel to use in admin panels
+class BaseReadOnlyPanel(EditHandler):
+    def render(self):
+        value = getattr(self.instance, self.attr)
+        if callable(value):
+            value = value()
+        return format_html('<div style="padding-top: 1.3em;">{}</div>', value)
+
+    def render_as_object(self):
+        return format_html(
+            '<fieldset><legend>{}</legend>'
+            '<ul class="fields"><li><div class="field" style="padding-top: 0.3em; padding-bottom: 0.8em;">{}</div></li></ul>'
+            '</fieldset>',
+            self.heading, self.render())
+
+    def render_as_field(self):
+        return format_html(
+            '<div class="field">'
+            '<label>{}{}</label>'
+            '<div class="field-content">{}</div>'
+            '</div>',
+            self.heading, _(':'), self.render())
+
+
+class ReadOnlyPanel:
+    def __init__(self, attr, heading=None, classname=''):
+        self.attr = attr
+        self.heading = pretty_name(self.attr) if heading is None else heading
+        self.classname = classname
+
+    def bind_to_model(self, model):
+        return type(str(_('ReadOnlyPanel')), (BaseReadOnlyPanel,),
+                    {'attr': self.attr, 'heading': self.heading,
+                     'classname': self.classname})
 
 @register_snippet
 class GroupstageTournamentModel(ClusterableModel):
@@ -72,50 +110,50 @@ class GroupstageTournamentModel(ClusterableModel):
         FieldPanel('team_1_first_halftime_score', classname="col3"),
         FieldPanel('team_1_second_halftime_score', classname="col3"),
         FieldPanel('team_1_shootout_score', classname="col3"),
-        FieldPanel('team_1_total_score', classname="col3"),
-        FieldPanel('team_1_first_halftime_point', classname="col3"),
-        FieldPanel('team_1_second_halftime_point', classname="col3"),
-        FieldPanel('team_1_shootout_point', classname="col3"),
-        FieldPanel('team_1_total_points', classname="col3"),
+        ReadOnlyPanel('team_1_total_score', classname="col3"),
+        ReadOnlyPanel('team_1_first_halftime_point', classname="col3"),
+        ReadOnlyPanel('team_1_second_halftime_point', classname="col3"),
+        ReadOnlyPanel('team_1_shootout_point', classname="col3"),
+        ReadOnlyPanel('team_1_total_points', classname="col3"),
         # Team 2
         FieldPanel('team_2', classname="col9"),
         FieldPanel('team_2_dress', classname="col3"),
         FieldPanel('team_2_first_halftime_score', classname="col3"),
         FieldPanel('team_2_second_halftime_score', classname="col3"),
         FieldPanel('team_2_shootout_score', classname="col3"),
-        FieldPanel('team_2_total_score', classname="col3"),
-        FieldPanel('team_2_first_halftime_point', classname="col3"),
-        FieldPanel('team_2_second_halftime_point', classname="col3"),
-        FieldPanel('team_2_shootout_point', classname="col3"),
-        FieldPanel('team_2_total_points', classname="col3"),
+        ReadOnlyPanel('team_2_total_score', classname="col3"),
+        ReadOnlyPanel('team_2_first_halftime_point', classname="col3"),
+        ReadOnlyPanel('team_2_second_halftime_point', classname="col3"),
+        ReadOnlyPanel('team_2_shootout_point', classname="col3"),
+        ReadOnlyPanel('team_2_total_points', classname="col3"),
     ]
 
     @receiver(pre_save, sender='tournament.GroupstageTournamentModel')
     def my_callback(sender, instance, *args, **kwargs):
         # Point for first half time
         if instance.team_1_first_halftime_score > instance.team_2_first_halftime_score:
-            instance.team_1_first_halftime_point == 1
+            instance.team_1_first_halftime_point += 1
         elif instance.team_2_first_halftime_score > instance.team_1_first_halftime_score:
-            instance.team_2_first_halftime_point == 1
+            instance.team_2_first_halftime_point += 1
         elif instance.team_2_first_halftime_score == instance.team_1_first_halftime_score:
-            instance.team_2_first_halftime_point == 1
-            instance.team_1_first_halftime_point == 1
+            instance.team_2_first_halftime_point += 1
+            instance.team_1_first_halftime_point += 1
         # Point for second half time
         if instance.team_1_second_halftime_score > instance.team_2_second_halftime_score:
-            instance.team_1_second_halftime_point == 1
+            instance.team_1_second_halftime_point += 1
         elif instance.team_2_second_halftime_score > instance.team_1_second_halftime_score:
-            instance.team_2_second_halftime_point == 1
+            instance.team_2_second_halftime_point += 1
         elif instance.team_2_second_halftime_score == instance.team_1_second_halftime_score:
-            instance.team_2_second_halftime_point == 1
-            instance.team_1_second_halftime_point == 1
+            instance.team_2_second_halftime_point += 1
+            instance.team_1_second_halftime_point += 1
         # Point for Shootout
         if instance.team_1_shootout_score > instance.team_2_shootout_score:
-            instance.team_1_shootout_point == 1
+            instance.team_1_shootout_point += 1
         elif instance.team_2_shootout_score > instance.team_1_shootout_score:
-            instance.team_2_shootout_point == 1
+            instance.team_2_shootout_point += 1
         elif instance.team_1_shootout_score == instance.team_2_shootout_score:
-            instance.team_1_shootout_point == 1
-            instance.team_2_shootout_point == 1
+            instance.team_1_shootout_point += 1
+            instance.team_2_shootout_point += 1
         instance.team_1_total_score = instance.team_1_first_halftime_score + instance.team_1_second_halftime_score + instance.team_1_shootout_score
         instance.team_2_total_score = instance.team_2_first_halftime_score + instance.team_2_second_halftime_score + instance.team_2_shootout_score
         instance.team_1_total_points = instance.team_1_first_halftime_point + instance.team_1_second_halftime_point + instance.team_1_shootout_point
