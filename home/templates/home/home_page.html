@@ -55,7 +55,9 @@
       <div class="row">
           <div class="col-md-8">
               {% if page.news_section %}
+                {% if page.news_section_title %}
               <h2 class="news_title">{{ page.news_section_title }}</h2>
+                {% endif %}
                       {% for childpage in page.news_section.specific.children|slice:"6" %}
                           <div class="col-md-12 jasgrid">
                               <div class="box-item">
