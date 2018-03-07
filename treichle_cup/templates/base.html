@@ -19,6 +19,7 @@
     <link href='//fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
     <!-- jQuery -->
     <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <link rel="shortcut icon" href="{% static 'wisli.ico' %}" type="image/x-icon">
     <title>
         {% block title %}
             {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
@@ -29,7 +30,7 @@
             {% endwith %}
         {% endblock %}
     </title>
-            
+
         {% block head-extra %}
         {% endblock head-extra %}
   </head>

@@ -1,13 +1,14 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags positions_tags %}
+{% load wagtailcore_tags positions_tags wagtailimages_tags %}
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
+<div class="container">
   <div class="row">
     <table border="2" width="100%">
       <tbody>
         <tr>
-          <th colspan="5">{{page.team_name}}</th>
+          <th colspan="5">{{page.title}}</th>
         </tr>
         <tr>
           <td colspan="2" rowspan="3">{% image page.team_logo fill-320x240 class="card-img-top rounded" %}</td>
@@ -53,4 +54,5 @@
       </tbody>
     </table>
   </div>
+</div>
 {% endblock %}

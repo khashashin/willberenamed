@@ -13,7 +13,11 @@ from wagtail.wagtailadmin.edit_handlers import (
 )
 from wagtail.wagtailcore.fields import StreamField
 from .constanten import POSITIONS, POSITIONS_SP
+from datetime import datetime
 
+YEAR_CHOICES = []
+for r in range(1999, (datetime.now().year+1)):
+    YEAR_CHOICES.append((r,r))
 
 class Staff(StructBlock):
     photo = ImageChooserBlock(required=False)
@@ -30,7 +34,7 @@ class Spieler(StructBlock):
     name = CharBlock(required=True)
     vorname = CharBlock(required=True)
     position = ChoiceBlock(choices=POSITIONS_SP, icon='cup')
-    jahrgang = IntegerBlock(required=True)
+    jahrgang = ChoiceBlock(label=_('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.now().year)
 
     class Meta:
         icon = 'user'
@@ -59,10 +63,8 @@ class TeamRooster(Page):
     ]
 
     def __str__(self):
-        return self.team_name
+        return self.title
 
-
-# Create your models here.
 class Teams(Page):
     introduction = models.TextField(
         help_text='Text to describe the page',

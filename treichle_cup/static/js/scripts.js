@@ -9,8 +9,8 @@ $( document ).ready(function() {
   });
 
   // Create two variable with the names of the months and days in an array
-	var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
-	var dayNames= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+	var monthNames = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "October", "November", "Dezember" ];
+	var dayNames= ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"]
 
 	// Create a newDate() object
 	var newDate = new Date();

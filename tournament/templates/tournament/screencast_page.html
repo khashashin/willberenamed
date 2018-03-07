@@ -1,0 +1,132 @@
+{% load static wagtailcore_tags wagtailuserbar wagtailimages_tags navigation %}
+{% get_site_root as site_root %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/presentation.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+  <!-- Webfonts -->
+  <link href='//fonts.googleapis.com/css?family=Nunito:400,700,300' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+  <link rel="shortcut icon" href="{% static 'wisli.ico' %}" type="image/x-icon">
+<body>
+  <div class="fill">
+    <ul id="buttons">
+      <li><a id="btnFullscreen"><i class="gofull fa fa-expand fa-3x"></i></a></li>
+      <li><a href="{% pageurl site_root %}"><i class="gofull fa fa-home fa-3x"></i></a></li>
+    </ul>
+  {% if page.matches|length >= 1 %}
+  {% for spiel in page.matches %}
+    {% if forloop.first == forloop.last %}
+    <div id="fullscreen" class="matchflex">
+      <ul class="ulup">
+        <li class="logo_bg first_team">{% image spiel.team_1.team_logo width-400 class="logo" %}<p>{{spiel.team_1.title}}</p></li>
+        <li class="first_team_score">{{ spiel.team_1_total_score }}</li>
+        <li class="colons">:</li>
+        <li class="second_team_score">{{ spiel.team_2_total_score }}</li>
+        <li class="logo_bg second_team">{% image spiel.team_2.team_logo width-400 class="logo" %}<p>{{spiel.team_2.title}}</p></li>
+      </ul>
+    </div>
+    {% endif %}
+  {% endfor %}
+  {% for spiel in page.matches %}
+  {% if forloop.first and forloop.last %}
+  {% else %}
+    {% if forloop.counter == 1 %}
+    <div id="match1" class="matchflex">
+      <ul class="ulup">
+        <li class="logo_bg first_team">{% image spiel.team_1.team_logo width-400 class="logo" %}<p>{{spiel.team_1.title}}</p></li>
+        <li class="first_team_score">{{ spiel.team_1_total_score }}</li>
+        <li class="colons">:</li>
+        <li class="second_team_score">{{ spiel.team_2_total_score }}</li>
+        <li class="logo_bg second_team">{% image spiel.team_2.team_logo width-400 class="logo" %}<p>{{spiel.team_2.title}}</p></li>
+      </ul>
+    </div>
+    {% endif %}
+    {% if forloop.counter == 2 %}
+     <div id="match2">
+       <ul class="uldown">
+        <li class="logo_bg first_team">{% image spiel.team_1.team_logo width-400 class="logo" %}<p>{{spiel.team_1.title}}</li>
+        <li class="">
+          <ul class="innerul">
+            <li class=""><h2>Next Game</h2></li>
+            <li class="data_text"><p>{{spiel.starts_at|date:'d-m-Y'}}</p></li>
+            <li class="time_text"><p>{{spiel.starts_at|date:'H:i'}}</p></li>
+          </ul>
+        </li>
+        <li class="logo_bg second_team">{% image spiel.team_2.team_logo width-400 class="logo" %}<p>{{spiel.team_2.title}}</p></li>
+      </ul>
+    </div>
+    {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% else %}
+    <div id="fullscreen">
+      <div class="ulup">
+        <p class="lastgame">Heute wird es keine Spiele mehr geben</p>
+      </div>
+    </div>
+  {% endif %}
+  </div>
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  setInterval(function(){
+    $.ajax({
+      type: "GET",
+      url: {% pageurl page %},
+      dataType: 'json',
+      success: function(data) {
+        // Playing First
+        $(".matchflex .first_team img").attr('src', data[0]["team_1_logo"]);
+        $(".matchflex .first_team p").contents()[0].textContent = data[0]["team_1_name"];
+        $(".first_team_score").contents()[0].textContent = data[0]["team_1_score"];
+        $(".matchflex .second_team img").attr('src', data[0]["team_2_logo"]);
+        $(".matchflex .second_team p").contents()[0].textContent = data[0]["team_2_name"];
+        $(".second_team_score").contents()[0].textContent = data[0]["team_2_score"];
+        // Playing Second
+        $("#match2 .first_team img").attr('src', data[1]["team_1_logo"]);
+        $("#match2 .first_team p").contents()[0].textContent = data[1]["team_1_name"];
+        $("#match2 .second_team img").attr('src', data[1]["team_2_logo"]);
+        $("#match2 .second_team p").contents()[0].textContent = data[1]["team_2_name"];
+        $("#match2 .data_text p").contents()[0].textContent = data[1]["beginnt_date"].toString().replace(/[""]+/g, '');
+        $("#match2 .time_text p").contents()[0].textContent = data[1]["beginnt_zeit"].toString().replace(/[""]+/g, '');
+      }
+    })
+  }, 30000);
+});
+  function toggleFullscreen(elem) {
+  elem = elem || document.documentElement;
+    if (!document.fullscreenElement && !document.mozFullScreenElement &&
+    !document.webkitFullscreenElement && !document.msFullscreenElement) {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+      }
+    }
+  }
+
+  document.getElementById('btnFullscreen').addEventListener('click', function() {
+  toggleFullscreen();
+  });
+</script>
+</body>
