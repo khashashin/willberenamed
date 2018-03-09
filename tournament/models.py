@@ -33,12 +33,12 @@ class BaseReadOnlyPanel(EditHandler):
         value = getattr(self.instance, self.attr)
         if callable(value):
             value = value()
-        return format_html('<div style="padding-top: 1.3em;">{}</div>', value)
+        return format_html('<div style="padding: 1.2em;">{}</div>', value)
 
     def render_as_object(self):
         return format_html(
             '<fieldset><legend>{}</legend>'
-            '<ul class="fields"><li><div class="field" style="padding-top: 0.3em; padding-bottom: 0.8em;">{}</div></li></ul>'
+            '<ul class="fields"><li><div class="field"><div class="field-content"><div class="input">{}</div></div></div></li></ul>'
             '</fieldset>',
             self.heading, self.render())
 
