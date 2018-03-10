@@ -38,7 +38,7 @@ class BaseReadOnlyPanel(EditHandler):
     def render_as_object(self):
         return format_html(
             '<fieldset><legend>{}</legend>'
-            '<ul class="fields"><li><div class="field"><div class="field-content"><div class="input">{}</div></div></div></li></ul>'
+            '<ul class="fields"><li><div class="field"><div class="field-content"><div style="background-color: #eeeeee; border-radius: 5px" class="input">{}</div></div></div></li></ul>'
             '</fieldset>',
             self.heading, self.render())
 
@@ -75,11 +75,11 @@ class GroupstageTournamentModel(ClusterableModel):
         related_name="+",
     )
     team_1_dress = ColorField(blank=True, verbose_name='Dress')
-    team_1_first_halftime_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat 1. HZ')
+    team_1_first_halftime_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat 1. HZ')
     team_1_first_halftime_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte 1. HZ')
-    team_1_second_halftime_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat 2. HZ')
+    team_1_second_halftime_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat 2. HZ')
     team_1_second_halftime_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte 2. HZ')
-    team_1_shootout_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat Shootout')
+    team_1_shootout_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat Shootout')
     team_1_shootout_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Schootout Punkte')
     team_1_total_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat Total')
     team_1_total_points = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte Total')
@@ -92,11 +92,11 @@ class GroupstageTournamentModel(ClusterableModel):
         related_name="+",
     )
     team_2_dress = ColorField(blank=True, verbose_name='Dress')
-    team_2_first_halftime_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat 1. HZ')
+    team_2_first_halftime_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat 1. HZ')
     team_2_first_halftime_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte 1. HZ')
-    team_2_second_halftime_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat 2. HZ')
+    team_2_second_halftime_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat 2. HZ')
     team_2_second_halftime_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte 2. HZ')
-    team_2_shootout_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat Shootout')
+    team_2_shootout_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat Shootout')
     team_2_shootout_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Schootout Punkte')
     team_2_total_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat Total')
     team_2_total_points = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte Total')
@@ -130,32 +130,56 @@ class GroupstageTournamentModel(ClusterableModel):
 
     @receiver(pre_save, sender='tournament.GroupstageTournamentModel')
     def my_callback(sender, instance, *args, **kwargs):
+        # TODO set default value programmativally
+        # if instance.team_1_first_halftime_point <= 0 or instance.team_1_first_halftime_point == None:
+        #     instance.team_1_first_halftime_point += 0
         # Point for first half time
-        if instance.team_1_first_halftime_score > instance.team_2_first_halftime_score:
-            instance.team_1_first_halftime_point += 1
-        elif instance.team_2_first_halftime_score > instance.team_1_first_halftime_score:
-            instance.team_2_first_halftime_point += 1
-        elif instance.team_2_first_halftime_score == instance.team_1_first_halftime_score:
-            instance.team_2_first_halftime_point += 1
-            instance.team_1_first_halftime_point += 1
+        if not (instance.team_1_first_halftime_score is None and instance.team_2_first_halftime_score is None):
+            if instance.team_1_first_halftime_score > instance.team_2_first_halftime_score:
+                instance.team_1_first_halftime_point = 2
+            elif instance.team_2_first_halftime_score > instance.team_1_first_halftime_score:
+                instance.team_2_first_halftime_point = 2
+            elif instance.team_1_first_halftime_score == instance.team_2_first_halftime_score:
+                instance.team_2_first_halftime_point = 1
+                instance.team_1_first_halftime_point = 1
         # Point for second half time
-        if instance.team_1_second_halftime_score > instance.team_2_second_halftime_score:
-            instance.team_1_second_halftime_point += 1
-        elif instance.team_2_second_halftime_score > instance.team_1_second_halftime_score:
-            instance.team_2_second_halftime_point += 1
-        elif instance.team_2_second_halftime_score == instance.team_1_second_halftime_score:
-            instance.team_2_second_halftime_point += 1
-            instance.team_1_second_halftime_point += 1
+        if not (instance.team_1_second_halftime_score is None and instance.team_2_second_halftime_score is None):
+            if instance.team_1_second_halftime_score > instance.team_2_second_halftime_score:
+                instance.team_1_second_halftime_point = 2
+            elif instance.team_2_second_halftime_score > instance.team_1_second_halftime_score:
+                instance.team_2_second_halftime_point = 2
+            elif instance.team_1_second_halftime_score == instance.team_2_second_halftime_score:
+                instance.team_2_second_halftime_point = 1
+                instance.team_1_second_halftime_point = 1
         # Point for Shootout
-        if instance.team_1_shootout_score > instance.team_2_shootout_score:
-            instance.team_1_shootout_point += 1
-        elif instance.team_2_shootout_score > instance.team_1_shootout_score:
-            instance.team_2_shootout_point += 1
-        elif instance.team_1_shootout_score == instance.team_2_shootout_score:
-            instance.team_1_shootout_point += 1
-            instance.team_2_shootout_point += 1
-        instance.team_1_total_score = instance.team_1_first_halftime_score + instance.team_1_second_halftime_score + instance.team_1_shootout_score
-        instance.team_2_total_score = instance.team_2_first_halftime_score + instance.team_2_second_halftime_score + instance.team_2_shootout_score
+        if not (instance.team_1_shootout_score is None and instance.team_2_shootout_score is None):
+            if instance.team_1_shootout_score > instance.team_2_shootout_score:
+                instance.team_1_shootout_point = 1
+            elif instance.team_2_shootout_score > instance.team_1_shootout_score:
+                instance.team_2_shootout_point = 1
+            elif instance.team_1_shootout_score == instance.team_2_shootout_score:
+                instance.team_1_shootout_point = 0
+                instance.team_2_shootout_point = 0
+        # Total score calculation Team 1
+        if not (instance.team_1_first_halftime_score is None):
+            if instance.team_1_first_halftime_score >= 0:
+                instance.team_1_total_score = instance.team_1_first_halftime_score
+                if not (instance.team_1_second_halftime_score is None):
+                    if instance.team_1_second_halftime_score >= 0:
+                        instance.team_1_total_score = instance.team_1_first_halftime_score + instance.team_1_second_halftime_score
+                        if not (instance.team_1_shootout_score is None):
+                            if instance.team_1_shootout_score >= 0:
+                                instance.team_1_total_score = instance.team_1_first_halftime_score + instance.team_1_second_halftime_score + instance.team_1_shootout_point
+        # Total score calculation Team 2
+        if not (instance.team_2_first_halftime_score is None):
+            if instance.team_2_first_halftime_score >= 0:
+                instance.team_2_total_score = instance.team_2_first_halftime_score
+                if not (instance.team_2_second_halftime_score is None):
+                    if instance.team_2_second_halftime_score >= 0:
+                        instance.team_2_total_score = instance.team_2_first_halftime_score + instance.team_2_second_halftime_score
+                        if not (instance.team_2_shootout_score is None):
+                            if instance.team_2_shootout_score >= 0:
+                                instance.team_2_total_score = instance.team_2_first_halftime_score + instance.team_2_second_halftime_score + instance.team_2_shootout_point
         instance.team_1_total_points = instance.team_1_first_halftime_point + instance.team_1_second_halftime_point + instance.team_1_shootout_point
         instance.team_2_total_points = instance.team_2_first_halftime_point + instance.team_2_second_halftime_point + instance.team_2_shootout_point
 
