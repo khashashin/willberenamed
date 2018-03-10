@@ -180,6 +180,24 @@ class GroupstageTournamentModel(ClusterableModel):
                         if not (instance.team_2_shootout_score is None):
                             if instance.team_2_shootout_score >= 0:
                                 instance.team_2_total_score = instance.team_2_first_halftime_score + instance.team_2_second_halftime_score + instance.team_2_shootout_point
+        if (instance.team_1_first_halftime_score is None or instance.team_1_second_halftime_score is None or instance.team_1_shootout_score is None):
+            if instance.team_1_first_halftime_score is None:
+                instance.team_1_first_halftime_point = 0
+                if instance.team_1_second_halftime_score is None:
+                    instance.team_1_second_halftime_point = 0
+                    if instance.team_1_shootout_score is None:
+                        instance.team_1_shootout_point = 0
+        if (instance.team_2_first_halftime_score is None or instance.team_2_second_halftime_score is None or instance.team_2_shootout_score is None):
+            if instance.team_2_first_halftime_score is None:
+                instance.team_2_first_halftime_point = 0
+                if instance.team_2_second_halftime_score is None:
+                    instance.team_2_second_halftime_point = 0
+                    if instance.team_2_shootout_score is None:
+                        instance.team_2_shootout_point = 0
+        if (instance.team_1_first_halftime_score is None and instance.team_1_second_halftime_score is None and instance.team_1_shootout_score is None):
+            instance.team_1_total_score = 0
+        if (instance.team_2_first_halftime_score is None and instance.team_2_second_halftime_score is None and instance.team_2_shootout_score is None):
+            instance.team_2_total_score = 0
         instance.team_1_total_points = instance.team_1_first_halftime_point + instance.team_1_second_halftime_point + instance.team_1_shootout_point
         instance.team_2_total_points = instance.team_2_first_halftime_point + instance.team_2_second_halftime_point + instance.team_2_shootout_point
 
