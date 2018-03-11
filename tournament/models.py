@@ -130,11 +130,8 @@ class GroupstageTournamentModel(ClusterableModel):
 
     @receiver(pre_save, sender='tournament.GroupstageTournamentModel')
     def my_callback(sender, instance, *args, **kwargs):
-        # TODO set default value programmativally
-        # if instance.team_1_first_halftime_point <= 0 or instance.team_1_first_halftime_point == None:
-        #     instance.team_1_first_halftime_point += 0
         # Point for first half time
-        if not (instance.team_1_first_halftime_score is None and instance.team_2_first_halftime_score is None):
+        if not (instance.team_1_first_halftime_score is None or instance.team_2_first_halftime_score is None):
             if instance.team_1_first_halftime_score > instance.team_2_first_halftime_score:
                 instance.team_1_first_halftime_point = 2
             elif instance.team_2_first_halftime_score > instance.team_1_first_halftime_score:
@@ -143,7 +140,7 @@ class GroupstageTournamentModel(ClusterableModel):
                 instance.team_2_first_halftime_point = 1
                 instance.team_1_first_halftime_point = 1
         # Point for second half time
-        if not (instance.team_1_second_halftime_score is None and instance.team_2_second_halftime_score is None):
+        if not (instance.team_1_second_halftime_score is None or instance.team_2_second_halftime_score is None):
             if instance.team_1_second_halftime_score > instance.team_2_second_halftime_score:
                 instance.team_1_second_halftime_point = 2
             elif instance.team_2_second_halftime_score > instance.team_1_second_halftime_score:
@@ -152,7 +149,7 @@ class GroupstageTournamentModel(ClusterableModel):
                 instance.team_2_second_halftime_point = 1
                 instance.team_1_second_halftime_point = 1
         # Point for Shootout
-        if not (instance.team_1_shootout_score is None and instance.team_2_shootout_score is None):
+        if not (instance.team_1_shootout_score is None or instance.team_2_shootout_score is None):
             if instance.team_1_shootout_score > instance.team_2_shootout_score:
                 instance.team_1_shootout_point = 1
             elif instance.team_2_shootout_score > instance.team_1_shootout_score:
@@ -183,17 +180,17 @@ class GroupstageTournamentModel(ClusterableModel):
         if (instance.team_1_first_halftime_score is None or instance.team_1_second_halftime_score is None or instance.team_1_shootout_score is None):
             if instance.team_1_first_halftime_score is None:
                 instance.team_1_first_halftime_point = 0
-                if instance.team_1_second_halftime_score is None:
-                    instance.team_1_second_halftime_point = 0
-                    if instance.team_1_shootout_score is None:
-                        instance.team_1_shootout_point = 0
+            if instance.team_1_second_halftime_score is None:
+                instance.team_1_second_halftime_point = 0
+            if instance.team_1_shootout_score is None:
+                instance.team_1_shootout_point = 0
         if (instance.team_2_first_halftime_score is None or instance.team_2_second_halftime_score is None or instance.team_2_shootout_score is None):
             if instance.team_2_first_halftime_score is None:
                 instance.team_2_first_halftime_point = 0
-                if instance.team_2_second_halftime_score is None:
-                    instance.team_2_second_halftime_point = 0
-                    if instance.team_2_shootout_score is None:
-                        instance.team_2_shootout_point = 0
+            if instance.team_2_second_halftime_score is None:
+                instance.team_2_second_halftime_point = 0
+            if instance.team_2_shootout_score is None:
+                instance.team_2_shootout_point = 0
         if (instance.team_1_first_halftime_score is None and instance.team_1_second_halftime_score is None and instance.team_1_shootout_score is None):
             instance.team_1_total_score = 0
         if (instance.team_2_first_halftime_score is None and instance.team_2_second_halftime_score is None and instance.team_2_shootout_score is None):
