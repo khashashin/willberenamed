@@ -71,7 +71,7 @@ margin: 0;
   font-size: 70px
 }
 .innerul p {
-  font-size: 30px
+  font-size: 70px
 }
 .innerul li {
 display: block;
@@ -389,7 +389,7 @@ margin-right: 9em;
   }
 
   .first_team {
-    margin-left: 0em;
+    margin-left: -15px;
   }
   .second_team {
     margin-right: 0em;
