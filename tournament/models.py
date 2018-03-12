@@ -74,13 +74,15 @@ class GroupstageTournamentModel(ClusterableModel):
         on_delete=models.SET_NULL,
         related_name="+",
     )
+    is_game_finished = models.BooleanField(blank=True, default=False, verbose_name='Finished')
+    finalphase = models.BooleanField(blank=True, default=False, verbose_name='Final')
     team_1_dress = ColorField(blank=True, verbose_name='Dress')
+    team_1_shootout_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat Shootout')
+    team_1_shootout_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Schootout Punkte')
     team_1_first_halftime_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat 1. HZ')
     team_1_first_halftime_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte 1. HZ')
     team_1_second_halftime_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat 2. HZ')
     team_1_second_halftime_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte 2. HZ')
-    team_1_shootout_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat Shootout')
-    team_1_shootout_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Schootout Punkte')
     team_1_total_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat Total')
     team_1_total_points = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte Total')
 
@@ -92,44 +94,55 @@ class GroupstageTournamentModel(ClusterableModel):
         related_name="+",
     )
     team_2_dress = ColorField(blank=True, verbose_name='Dress')
+    team_2_shootout_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat Shootout')
+    team_2_shootout_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Schootout Punkte')
     team_2_first_halftime_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat 1. HZ')
     team_2_first_halftime_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte 1. HZ')
     team_2_second_halftime_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat 2. HZ')
     team_2_second_halftime_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte 2. HZ')
-    team_2_shootout_score = models.PositiveSmallIntegerField(blank=True, default=None, null=True, verbose_name='Resultat Shootout')
-    team_2_shootout_point = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Schootout Punkte')
     team_2_total_score = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Resultat Total')
     team_2_total_points = models.PositiveSmallIntegerField(blank=True, default=0, verbose_name='Punkte Total')
 
     panels = [
-        FieldPanel('number', classname="col6"),
-        FieldPanel('starts_at', classname="col6"),
+        FieldPanel('number', classname="col4"),
+        FieldPanel('starts_at', classname="col4"),
+        FieldPanel('is_game_finished', classname="col2"),
+        FieldPanel('finalphase', classname="col2"),
         # Team 1
         FieldPanel('team_1', classname="col9"),
         FieldPanel('team_1_dress', classname="col3"),
+        FieldPanel('team_1_shootout_score', classname="col3"),
         FieldPanel('team_1_first_halftime_score', classname="col3"),
         FieldPanel('team_1_second_halftime_score', classname="col3"),
-        FieldPanel('team_1_shootout_score', classname="col3"),
         ReadOnlyPanel('team_1_total_score', classname="col3"),
+        ReadOnlyPanel('team_1_shootout_point', classname="col3"),
         ReadOnlyPanel('team_1_first_halftime_point', classname="col3"),
         ReadOnlyPanel('team_1_second_halftime_point', classname="col3"),
-        ReadOnlyPanel('team_1_shootout_point', classname="col3"),
         ReadOnlyPanel('team_1_total_points', classname="col3"),
         # Team 2
         FieldPanel('team_2', classname="col9"),
         FieldPanel('team_2_dress', classname="col3"),
+        FieldPanel('team_2_shootout_score', classname="col3"),
         FieldPanel('team_2_first_halftime_score', classname="col3"),
         FieldPanel('team_2_second_halftime_score', classname="col3"),
-        FieldPanel('team_2_shootout_score', classname="col3"),
         ReadOnlyPanel('team_2_total_score', classname="col3"),
+        ReadOnlyPanel('team_2_shootout_point', classname="col3"),
         ReadOnlyPanel('team_2_first_halftime_point', classname="col3"),
         ReadOnlyPanel('team_2_second_halftime_point', classname="col3"),
-        ReadOnlyPanel('team_2_shootout_point', classname="col3"),
         ReadOnlyPanel('team_2_total_points', classname="col3"),
     ]
 
     @receiver(pre_save, sender='tournament.GroupstageTournamentModel')
     def my_callback(sender, instance, *args, **kwargs):
+        # Point for Shootout
+        if not (instance.team_1_shootout_score is None or instance.team_2_shootout_score is None):
+            if instance.team_1_shootout_score > instance.team_2_shootout_score:
+                instance.team_1_shootout_point = 1
+            elif instance.team_2_shootout_score > instance.team_1_shootout_score:
+                instance.team_2_shootout_point = 1
+            elif instance.team_1_shootout_score == instance.team_2_shootout_score:
+                instance.team_1_shootout_point = 0
+                instance.team_2_shootout_point = 0
         # Point for first half time
         if not (instance.team_1_first_halftime_score is None or instance.team_2_first_halftime_score is None):
             if instance.team_1_first_halftime_score > instance.team_2_first_halftime_score:
@@ -148,35 +161,26 @@ class GroupstageTournamentModel(ClusterableModel):
             elif instance.team_1_second_halftime_score == instance.team_2_second_halftime_score:
                 instance.team_2_second_halftime_point = 1
                 instance.team_1_second_halftime_point = 1
-        # Point for Shootout
-        if not (instance.team_1_shootout_score is None or instance.team_2_shootout_score is None):
-            if instance.team_1_shootout_score > instance.team_2_shootout_score:
-                instance.team_1_shootout_point = 1
-            elif instance.team_2_shootout_score > instance.team_1_shootout_score:
-                instance.team_2_shootout_point = 1
-            elif instance.team_1_shootout_score == instance.team_2_shootout_score:
-                instance.team_1_shootout_point = 0
-                instance.team_2_shootout_point = 0
         # Total score calculation Team 1
-        if not (instance.team_1_first_halftime_score is None):
-            if instance.team_1_first_halftime_score >= 0:
-                instance.team_1_total_score = instance.team_1_first_halftime_score
-                if not (instance.team_1_second_halftime_score is None):
-                    if instance.team_1_second_halftime_score >= 0:
-                        instance.team_1_total_score = instance.team_1_first_halftime_score + instance.team_1_second_halftime_score
-                        if not (instance.team_1_shootout_score is None):
-                            if instance.team_1_shootout_score >= 0:
-                                instance.team_1_total_score = instance.team_1_first_halftime_score + instance.team_1_second_halftime_score + instance.team_1_shootout_point
+        if not (instance.team_1_shootout_score is None):
+            if instance.team_1_shootout_score >= 0:
+                instance.team_1_total_score = instance.team_1_shootout_score
+                if not (instance.team_1_first_halftime_score is None):
+                    if instance.team_1_first_halftime_score >= 0:
+                        instance.team_1_total_score = instance.team_1_first_halftime_score + instance.team_1_shootout_score
+                        if not (instance.team_1_second_halftime_score is None):
+                            if instance.team_1_second_halftime_score >= 0:
+                                instance.team_1_total_score = instance.team_1_shootout_point + instance.team_1_first_halftime_score + instance.team_1_second_halftime_score
         # Total score calculation Team 2
-        if not (instance.team_2_first_halftime_score is None):
-            if instance.team_2_first_halftime_score >= 0:
-                instance.team_2_total_score = instance.team_2_first_halftime_score
-                if not (instance.team_2_second_halftime_score is None):
-                    if instance.team_2_second_halftime_score >= 0:
-                        instance.team_2_total_score = instance.team_2_first_halftime_score + instance.team_2_second_halftime_score
-                        if not (instance.team_2_shootout_score is None):
-                            if instance.team_2_shootout_score >= 0:
-                                instance.team_2_total_score = instance.team_2_first_halftime_score + instance.team_2_second_halftime_score + instance.team_2_shootout_point
+        if not (instance.team_2_shootout_score is None):
+            if instance.team_2_shootout_score >= 0:
+                instance.team_2_total_score = instance.team_2_shootout_score
+                if not (instance.team_2_first_halftime_score is None):
+                    if instance.team_2_first_halftime_score >= 0:
+                        instance.team_2_total_score = instance.team_2_first_halftime_score + instance.team_2_shootout_score
+                        if not (instance.team_2_second_halftime_score is None):
+                            if instance.team_2_second_halftime_score >= 0:
+                                instance.team_2_total_score = instance.team_2_shootout_point + instance.team_2_first_halftime_score + instance.team_2_second_halftime_score
         if (instance.team_1_first_halftime_score is None or instance.team_1_second_halftime_score is None or instance.team_1_shootout_score is None):
             if instance.team_1_first_halftime_score is None:
                 instance.team_1_first_halftime_point = 0
