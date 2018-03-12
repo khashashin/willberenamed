@@ -365,8 +365,43 @@ margin-right: 9em;
   }
   .logo {
     height: 260px !important;
-    min-width: 390px !important;
-    max-width: 390px !important;
+    min-width: 290px !important;
+    max-width: 290px !important;
+  }
+  .logo_bg {
+    height: 260px !important;
+  }
+  .lastgame {
+    font-size: 90px;
+  }
+}
+@media screen and (max-width: 1280px) {
+  .innerul h2 {
+    font-size: 25px
+  }
+  .innerul p {
+    font-size: 16px
+  }
+  .first_team_score,
+  .second_team_score,
+  .colons {
+    font-size: 90px;
+  }
+
+  .first_team {
+    margin-left: 4em;
+  }
+  .second_team {
+    margin-right: 4em;
+  }
+  .first_team,
+  .second_team {
+    font-size: 20px;
+  }
+  .logo {
+    height: 260px !important;
+    min-width: 290px !important;
+    max-width: 290px !important;
   }
   .logo_bg {
     height: 260px !important;
