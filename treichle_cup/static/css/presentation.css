@@ -399,12 +399,12 @@ margin-right: 9em;
     font-size: 20px;
   }
   .logo {
-    height: 140px !important;
-    min-width: 170px !important;
-    max-width: 170px !important;
+    height: 120px !important;
+    min-width: 160px !important;
+    max-width: 160px !important;
   }
   .logo_bg {
-    height: 160px !important;
+    height: 120px !important;
   }
   .lastgame {
     font-size: 90px;
