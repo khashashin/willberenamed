@@ -380,7 +380,7 @@ margin-right: 9em;
     font-size: 25px
   }
   .innerul p {
-    font-size: 16px
+    font-size: 25px
   }
   .first_team_score,
   .second_team_score,
@@ -392,7 +392,7 @@ margin-right: 9em;
     margin-left: -15px;
   }
   .second_team {
-    margin-right: 0em;
+    margin-right: 15px;
   }
   .first_team,
   .second_team {
