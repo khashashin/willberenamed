@@ -385,23 +385,23 @@ margin-right: 9em;
   .first_team_score,
   .second_team_score,
   .colons {
-    font-size: 90px;
+    font-size: 60px;
   }
 
   .first_team {
-    margin-left: 4em;
+    margin-left: 0em;
   }
   .second_team {
-    margin-right: 4em;
+    margin-right: 0em;
   }
   .first_team,
   .second_team {
     font-size: 20px;
   }
   .logo {
-    height: 160px !important;
-    min-width: 190px !important;
-    max-width: 190px !important;
+    height: 140px !important;
+    min-width: 170px !important;
+    max-width: 170px !important;
   }
   .logo_bg {
     height: 160px !important;
