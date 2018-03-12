@@ -3,6 +3,7 @@ html, body {
   font-family: 'Nunito', sans-serif;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 #buttons {
   position: fixed;
@@ -20,7 +21,7 @@ list-style-type: none;
   height: 100%;
 }
 .gofull {
-  color: black;
+  color: #ffffff;
   padding: 3px;
   margin: 0;
 }
@@ -35,7 +36,7 @@ list-style-type: none;
   width: 100%;
   height: 100%;
   min-height: 100%;
-  background: black;
+  background: #fff;
   display: table;
   text-align: center;
 }
@@ -44,12 +45,12 @@ list-style-type: none;
   width: 100%;
   height: 50%;
   min-height: 50%;
-  background: black;
+  background: #fff;
   display: table;
   text-align: center;
 }
 #match1 {
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid black;
 }
 .ulup,
 .uldown {
@@ -59,7 +60,7 @@ vertical-align: middle;
 .ulup li,
 .uldown li {
 display: inline-block;
-color: white;
+color: black;
 vertical-align: middle;
 }
 .innerul {
@@ -111,4 +112,304 @@ margin-right: 9em;
   font-size: 100px;
   color: white;
   font-weight: bold;
+}
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+  .innerul h2 {
+    font-size: 25px
+  }
+  .innerul p {
+    font-size: 16px
+  }
+  .first_team_score,
+  .second_team_score,
+  .colons {
+    font-size: 90px;
+  }
+
+  .first_team {
+    margin-left: 0em;
+  }
+  .second_team {
+    margin-right: 0em;
+  }
+  .first_team,
+  .second_team {
+    font-size: 20px;
+  }
+  .logo {
+    height: 180px !important;
+    min-width: 260px !important;
+  }
+  .logo_bg {
+    height: 180px !important;
+  }
+
+  .lastgame {
+    font-size: 60px;
+  }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width: 321px) {
+  .innerul h2 {
+    font-size: 25px
+  }
+  .innerul p {
+    font-size: 16px
+  }
+  .first_team_score,
+  .second_team_score,
+  .colons {
+    font-size: 90px;
+  }
+
+  .first_team {
+    margin-left: 0em;
+  }
+  .second_team {
+    margin-right: 0em;
+  }
+  .first_team,
+  .second_team {
+    font-size: 20px;
+  }
+  .logo {
+    height: 180px !important;
+    min-width: 290px !important;
+    max-width: 290px !important;
+  }
+  .logo_bg {
+    height: 180px !important;
+  }
+
+  .lastgame {
+    font-size: 60px;
+  }
+}
+
+/* Smartphones (portrait) ----------- */
+/* viewport size <= 320px ----------- */
+@media only screen and (max-width : 320px) {
+.innerul h2 {
+    font-size: 25px
+  }
+  .innerul p {
+    font-size: 16px
+  }
+  .first_team_score,
+  .second_team_score,
+  .colons {
+    font-size: 90px;
+  }
+
+  .first_team {
+    margin-left: 0em;
+  }
+  .second_team {
+    margin-right: 0em;
+  }
+  .first_team,
+  .second_team {
+    font-size: 20px;
+  }
+  .logo {
+    height: 180px !important;
+    min-width: 290px !important;
+    max-width: 290px !important;
+  }
+  .logo_bg {
+    height: 180px !important;
+  }
+
+  .lastgame {
+    font-size: 60px;
+  }
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+  .innerul h2 {
+    font-size: 25px
+  }
+  .innerul p {
+    font-size: 16px
+  }
+  .first_team_score,
+  .second_team_score,
+  .colons {
+    font-size: 90px;
+  }
+
+  .first_team {
+    margin-left: 12px;
+  }
+  .second_team {
+    margin-right: 12px;
+  }
+  .first_team,
+  .second_team {
+    font-size: 20px;
+  }
+  .logo {
+    height: 180px !important;
+    min-width: 290px !important;
+    max-width: 290px !important;
+  }
+  .logo_bg {
+    height: 180px !important;
+  }
+  .lastgame {
+    font-size: 60px;
+  }
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) {
+  .innerul h2 {
+    font-size: 25px
+  }
+  .innerul p {
+    font-size: 16px
+  }
+  .first_team_score,
+  .second_team_score,
+  .colons {
+    font-size: 90px;
+  }
+
+  .first_team {
+    margin-left: 12px;
+  }
+  .second_team {
+    margin-right: 12px;
+  }
+  .first_team,
+  .second_team {
+    font-size: 20px;
+  }
+  .logo {
+    height: 180px !important;
+    min-width: 290px !important;
+    max-width: 290px !important;
+  }
+  .logo_bg {
+    height: 180px !important;
+  }
+
+  .lastgame {
+    font-size: 60px;
+  }
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) {
+  .innerul h2 {
+    font-size: 25px
+  }
+  .innerul p {
+    font-size: 16px
+  }
+  .first_team_score,
+  .second_team_score,
+  .colons {
+    font-size: 90px;
+  }
+
+  .first_team {
+    margin-left: 12px;
+  }
+  .second_team {
+    margin-right: 12px;
+  }
+  .first_team,
+  .second_team {
+    font-size: 20px;
+  }
+  .logo {
+    height: 180px !important;
+    min-width: 290px !important;
+    max-width: 290px !important;
+  }
+  .logo_bg {
+    height: 180px !important;
+  }
+  .lastgame {
+    font-size: 60px;
+  }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1224px) {
+/* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen
+and (min-width : 1824px) {
+/* Styles */
+}
+
+/*************** Specific to device if required **********************/
+/* stolen from http://nmsdvid.com/snippets/ **************************/
+
+/* iPhone 4 ----------- */
+@media only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}
+
+/* iPhone5 ------------- */
+@media screen and (device-aspect-ratio: 40/71) {
+	/* Styles */
+}
+or
+@media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){
+/* Styles */
+}
+
+/* Blackberry Torch ---------- */
+@media screen and (max-device-width: 480px) {
+}
+
+/* Samsung S3 ---------------- */
+@media only screen and (-webkit-device-pixel-ratio: 2) {
+}
+
+/* Google Nexus 7 ------------- */
+@media screen and (device-width: 600px) and (device-height: 905px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) {
+}
+
+/* iPad Mini ------------------ */
+@media screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) {
+}
+
+/* iPad 3 (Landscape)-------------------- */
+@media (max-device-width: 1024px) and (orientation: landscape) {
+}
+
+/* iPad 3 (portrait)-------------------- */
+@media (max-device-width: 768px) and (orientation: portrait) {
+}
+
+/* Galaxy Tab 10.1 (Landscape) -------- */
+@media (max-device-width: 1280px) and (orientation: landscape) {
+}
+
+/* Galaxy Tab 10.1 (Portrait) -------- */
+@media (max-device-width: 800px) and (orientation: portrait) {
+}
+
+/* Retina images ---------------------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+
+  /* Retina replacement CSS here */
+
 }
