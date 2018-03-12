@@ -389,22 +389,22 @@ margin-right: 9em;
   }
 
   .first_team {
-    margin-left: -10px;
+    margin-left: -5px;
   }
   .second_team {
-    margin-right: 20px;
+    margin-right: 25px;
   }
   .first_team,
   .second_team {
     font-size: 20px;
   }
   .logo {
-    height: 110px !important;
-    min-width: 160px !important;
-    max-width: 160px !important;
+    height: 100px !important;
+    min-width: 150px !important;
+    max-width: 150px !important;
   }
   .logo_bg {
-    height: 110px !important;
+    height: 100px !important;
   }
   .lastgame {
     font-size: 90px;
