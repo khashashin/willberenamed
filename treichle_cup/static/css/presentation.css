@@ -340,76 +340,76 @@ margin-right: 9em;
 }
 
 /* Desktops and laptops ----------- */
-@media only screen
-and (min-width : 1224px) {
-/* Styles */
+@media only screen and (min-width : 1224px) {
+  .innerul h2 {
+    font-size: 25px
+  }
+  .innerul p {
+    font-size: 16px
+  }
+  .first_team_score,
+  .second_team_score,
+  .colons {
+    font-size: 90px;
+  }
+
+  .first_team {
+    margin-left: 4em;
+  }
+  .second_team {
+    margin-right: 4em;
+  }
+  .first_team,
+  .second_team {
+    font-size: 20px;
+  }
+  .logo {
+    height: 260px !important;
+    min-width: 390px !important;
+    max-width: 390px !important;
+  }
+  .logo_bg {
+    height: 260px !important;
+  }
+  .lastgame {
+    font-size: 90px;
+  }
 }
 
 /* Large screens ----------- */
-@media only screen
-and (min-width : 1824px) {
-/* Styles */
+@media only screen and (min-width : 1824px) {
+  .innerul h2 {
+    font-size: 25px
+  }
+  .innerul p {
+    font-size: 16px
+  }
+  .first_team_score,
+  .second_team_score,
+  .colons {
+    font-size: 90px;
+  }
+
+  .first_team {
+    margin-left: 4em;
+  }
+  .second_team {
+    margin-right: 4em;
+  }
+  .first_team,
+  .second_team {
+    font-size: 20px;
+  }
+  .logo {
+    height: 260px !important;
+    min-width: 390px !important;
+    max-width: 390px !important;
+  }
+  .logo_bg {
+    height: 260px !important;
+  }
+  .lastgame {
+    font-size: 90px;
+  }
 }
-
-/*************** Specific to device if required **********************/
-/* stolen from http://nmsdvid.com/snippets/ **************************/
-
-/* iPhone 4 ----------- */
-@media only screen and (-webkit-min-device-pixel-ratio : 1.5),
-only screen and (min-device-pixel-ratio : 1.5) {
-/* Styles */
-}
-
-/* iPhone5 ------------- */
-@media screen and (device-aspect-ratio: 40/71) {
-	/* Styles */
-}
-or
-@media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){
-/* Styles */
-}
-
-/* Blackberry Torch ---------- */
-@media screen and (max-device-width: 480px) {
-}
-
-/* Samsung S3 ---------------- */
-@media only screen and (-webkit-device-pixel-ratio: 2) {
-}
-
-/* Google Nexus 7 ------------- */
-@media screen and (device-width: 600px) and (device-height: 905px) and (-webkit-min-device-pixel-ratio: 1.331) and (-webkit-max-device-pixel-ratio: 1.332) {
-}
-
-/* iPad Mini ------------------ */
-@media screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) {
-}
-
-/* iPad 3 (Landscape)-------------------- */
-@media (max-device-width: 1024px) and (orientation: landscape) {
-}
-
-/* iPad 3 (portrait)-------------------- */
-@media (max-device-width: 768px) and (orientation: portrait) {
-}
-
-/* Galaxy Tab 10.1 (Landscape) -------- */
-@media (max-device-width: 1280px) and (orientation: landscape) {
-}
-
-/* Galaxy Tab 10.1 (Portrait) -------- */
-@media (max-device-width: 800px) and (orientation: portrait) {
-}
-
-/* Retina images ---------------------- */
-@media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (   min--moz-device-pixel-ratio: 2),
-only screen and (     -o-min-device-pixel-ratio: 2/1),
-only screen and (        min-device-pixel-ratio: 2),
-only screen and (                min-resolution: 192dpi),
-only screen and (                min-resolution: 2dppx) {
-
-  /* Retina replacement CSS here */
-
 }
