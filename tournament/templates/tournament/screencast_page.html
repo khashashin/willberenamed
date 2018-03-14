@@ -79,7 +79,7 @@ $(document).ready(function() {
     $.ajax({
       type: "GET",
       url: {% pageurl page %},
-      dataType: 'jsonp',
+      dataType: 'json',
       success: function(data) {
         // Playing First
         $(".matchflex .first_team img").attr('src', data[0]["team_1_logo"]);
