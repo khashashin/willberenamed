@@ -52,6 +52,9 @@ list-style-type: none;
 #match1 {
   border-bottom: 2px solid black;
 }
+.ulup {
+position: relative;
+}
 .ulup,
 .uldown {
 display: table-cell;
@@ -62,6 +65,11 @@ vertical-align: middle;
 display: inline-block;
 color: black;
 vertical-align: middle;
+}
+.score p {
+  font-size: 180px;
+  font-weight: bold;
+  display: inline-block;
 }
 .innerul {
 padding: 0;
@@ -81,11 +89,19 @@ margin: 0;
 .innerul li:nth-child(1) {
 top: 0;
 }
-.first_team_score,
-.second_team_score,
-.colons {
-font-size: 180px;
-font-weight: bold;
+.ulup > span {
+  position: absolute;
+  bottom: 30px;
+  left: 49%;
+  margin-left: -88px;
+}
+.space {
+  padding: 0 5px 0 5px;
+}
+.phasen p {
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold;
 }
 .first_team {
 float: left;
@@ -344,20 +360,23 @@ margin-right: 9em;
   .innerul h2 {
     font-size: 25px
   }
-  .innerul p {
+  .innerul .data_text {
     font-size: 16px
+  }
+  .innerul .time_text {
+    font-size: 25px
   }
   .first_team_score,
   .second_team_score,
   .colons {
-    font-size: 90px;
+    font-size: 150px;
   }
 
   .first_team {
-    margin-left: 4em;
+    margin-left: 6em;
   }
   .second_team {
-    margin-right: 4em;
+    margin-right: 6em;
   }
   .first_team,
   .second_team {
@@ -375,6 +394,7 @@ margin-right: 9em;
     font-size: 90px;
   }
 }
+/* TV */
 @media screen and (max-width: 1280px) {
   .innerul h2 {
     font-size: 25px
@@ -414,26 +434,29 @@ margin-right: 9em;
 /* Large screens ----------- */
 @media only screen and (min-width : 1824px) {
   .innerul h2 {
-    font-size: 25px
+    font-size: 40px
   }
   .innerul p {
-    font-size: 16px
+    font-size: 30px
+  }
+  .time_text{
+    font-weight: bold;
   }
   .first_team_score,
-  .second_team_score,
-  .colons {
-    font-size: 90px;
+  .second_team_score {
+    font-size: 150px;
   }
 
   .first_team {
-    margin-left: 4em;
+    margin-left: 6em;
   }
   .second_team {
-    margin-right: 4em;
+    margin-right: 6em;
   }
   .first_team,
   .second_team {
-    font-size: 20px;
+    font-size: 30px;
+    font-weight: bold;
   }
   .logo {
     height: 260px !important;
