@@ -120,8 +120,6 @@ $(document).ready(function() {
       url: {% pageurl page %},
       dataType: 'json',
       success: function(data) {
-        console.log(data);
-        console.log(data[0]["team_1_shootout_score"]);
         // Playing First
         $(".matchflex .first_team img").attr('src', data[0]["team_1_logo"]);
         $(".matchflex .first_team p").contents()[0].textContent = data[0]["team_1_name"];
