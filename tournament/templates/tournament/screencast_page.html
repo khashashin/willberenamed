@@ -41,7 +41,6 @@
         <li class="logo_bg first_team">{% image spiel.team_1.team_logo width-400 class="logo" %}<p>{{spiel.team_1.title}}</p></li>
         <li class="score"><p class="first_team_score">{{ spiel.team_1_total_score }}</p><p>:</p><p class="second_team_score">{{ spiel.team_2_total_score }}</p></li>
         <span class="phasen">
-          <p>
             <p>|</p>
               {% if spiel.team_1_shootout_score != None %}
                 <p class="space" id="t1shoots">{{ spiel.team_1_shootout_score }}</p>
@@ -79,7 +78,6 @@
                 <p class="space" id="t2zhs">-</p>
               {% endif %}
             <p>|</p>
-          </p>
         </span>
         <li class="logo_bg second_team">{% image spiel.team_2.team_logo width-400 class="logo" %}<p>{{spiel.team_2.title}}</p></li>
       </ul>
@@ -166,7 +164,7 @@ $(document).ready(function() {
         $("#match2 .time_text p").contents()[0].textContent = data[1]["beginnt_zeit"].toString().replace(/[""]+/g, '');
       }
     })
-  }, 30000);
+  }, 20000);
 });
   function toggleFullscreen(elem) {
   elem = elem || document.documentElement;

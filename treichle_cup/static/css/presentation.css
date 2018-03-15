@@ -78,8 +78,11 @@ margin: 0;
 .innerul h2 {
   font-size: 70px
 }
-.innerul p {
-  font-size: 70px
+.innerul .data_text {
+  font-size: 20px
+}
+.innerul .time_text {
+  font-size: 40px
 }
 .innerul li {
 display: block;
@@ -134,8 +137,11 @@ margin-right: 9em;
   .innerul h2 {
     font-size: 25px
   }
-  .innerul p {
-    font-size: 16px
+  .innerul .data_text {
+    font-size: 20px
+  }
+  .innerul .time_text {
+    font-size: 40px
   }
   .first_team_score,
   .second_team_score,
@@ -171,8 +177,11 @@ margin-right: 9em;
   .innerul h2 {
     font-size: 25px
   }
-  .innerul p {
-    font-size: 16px
+  .innerul .data_text {
+    font-size: 20px
+  }
+  .innerul .time_text {
+    font-size: 40px
   }
   .first_team_score,
   .second_team_score,
@@ -210,8 +219,11 @@ margin-right: 9em;
 .innerul h2 {
     font-size: 25px
   }
-  .innerul p {
-    font-size: 16px
+  .innerul .data_text {
+    font-size: 20px
+  }
+  .innerul .time_text {
+    font-size: 40px
   }
   .first_team_score,
   .second_team_score,
@@ -248,8 +260,11 @@ margin-right: 9em;
   .innerul h2 {
     font-size: 25px
   }
-  .innerul p {
-    font-size: 16px
+  .innerul .data_text {
+    font-size: 20px
+  }
+  .innerul .time_text {
+    font-size: 40px
   }
   .first_team_score,
   .second_team_score,
@@ -285,8 +300,11 @@ margin-right: 9em;
   .innerul h2 {
     font-size: 25px
   }
-  .innerul p {
-    font-size: 16px
+  .innerul .data_text {
+    font-size: 20px
+  }
+  .innerul .time_text {
+    font-size: 40px
   }
   .first_team_score,
   .second_team_score,
@@ -323,8 +341,12 @@ margin-right: 9em;
   .innerul h2 {
     font-size: 25px
   }
-  .innerul p {
-    font-size: 16px
+  .innerul .data_text {
+    font-size: 20px
+  }
+  .innerul .time_text {
+    font-size: 60px;
+    font-weight: bold;
   }
   .first_team_score,
   .second_team_score,
@@ -361,10 +383,11 @@ margin-right: 9em;
     font-size: 25px
   }
   .innerul .data_text {
-    font-size: 16px
+    font-size: 20px
   }
   .innerul .time_text {
-    font-size: 25px
+    font-size: 60px;
+    font-weight: bold;
   }
   .first_team_score,
   .second_team_score,
@@ -399,8 +422,11 @@ margin-right: 9em;
   .innerul h2 {
     font-size: 25px
   }
-  .innerul p {
-    font-size: 25px
+  .innerul .data_text {
+    font-size: 20px
+  }
+  .innerul .time_text {
+    font-size: 60px
   }
   .first_team_score,
   .second_team_score,
@@ -436,10 +462,11 @@ margin-right: 9em;
   .innerul h2 {
     font-size: 40px
   }
-  .innerul p {
-    font-size: 30px
+  .innerul .data_text {
+    font-size: 20px;
   }
-  .time_text{
+  .innerul .time_text {
+    font-size: 80px;
     font-weight: bold;
   }
   .first_team_score,
