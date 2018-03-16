@@ -161,6 +161,9 @@ class GroupstageTournamentModel(ClusterableModel):
             elif instance.team_1_second_halftime_score == instance.team_2_second_halftime_score:
                 instance.team_2_second_halftime_point = 1
                 instance.team_1_second_halftime_point = 1
+        if not instance.finalphase:
+            instance.team_1_shootout_point = 0
+            instance.team_2_shootout_point = 0
         # Total score calculation Team 1
         if not (instance.team_1_shootout_score is None):
             if instance.team_1_shootout_score >= 0:
@@ -221,6 +224,7 @@ class GroupstageScreencastRelationship(Orderable, models.Model):
 
 
 class ScreencastPage(Page):
+    show_sponsoren = models.BooleanField(blank=True, default=False, verbose_name="Sponsoren anzeigen")
     content_panels = Page.content_panels + [
         InlinePanel(
             'groupstage_screencast_relationship', label="Choose Teams",
@@ -240,6 +244,7 @@ class ScreencastPage(Page):
         if request.is_ajax():
             result = []
             for match in self.matches():
+                sponsors = self.show_sponsoren
                 team_1_logo = match.team_1.team_logo.get_rendition('width-400')
                 team_2_logo = match.team_2.team_logo.get_rendition('width-400')
                 beginnt_date = json.dumps(match.starts_at.date().strftime("%d-%m-%Y"), cls=DjangoJSONEncoder)
@@ -259,6 +264,7 @@ class ScreencastPage(Page):
                     'team_2_zh_score': match.team_2_second_halftime_score,
                     'team_2_score': match.team_2_total_score,
                     'team_2_logo': team_2_logo.url,
+                    'sponsors': sponsors,
                 })
 
             json_output = json.dumps(result)

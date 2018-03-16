@@ -21,7 +21,7 @@
   {% if page.matches|length >= 1 %}
   {% for spiel in page.matches %}
     {% if forloop.first == forloop.last %}
-    <div id="fullscreen" class="matchflex">
+    <div id="only_one_match" class="matchflex">
       <ul class="ulup">
         <li class="logo_bg first_team">{% image spiel.team_1.team_logo width-400 class="logo" %}<p>{{spiel.team_1.title}}</p></li>
         <li class="first_team_score">{{ spiel.team_1_total_score }}</li>
@@ -36,6 +36,7 @@
   {% if forloop.first and forloop.last %}
   {% else %}
     {% if forloop.counter == 1 %}
+    <div id="two_mathes">
     <div id="match1" class="matchflex">
       <ul class="ulup">
         <li class="logo_bg first_team">{% image spiel.team_1.team_logo width-400 class="logo" %}<p>{{spiel.team_1.title}}</p></li>
@@ -101,8 +102,8 @@
     {% endif %}
   {% endfor %}
   {% else %}
-    <div id="fullscreen">
-      <div class="ulup">
+    <div id="show_sponsors">
+      <div class="sponsors_body">
         <p class="lastgame">Heute wird es keine Spiele mehr geben</p>
       </div>
     </div>
@@ -112,6 +113,9 @@
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+  $("#only_one_match").hide();
+  $("#two_mathes").hide();
+  $("#show_sponsors").hide();
   setInterval(function(){
     $.ajax({
       type: "GET",
