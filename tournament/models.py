@@ -24,6 +24,7 @@ from django.forms.utils import pretty_name
 from django.utils.html import format_html
 from wagtail.wagtailadmin.edit_handlers import EditHandler
 from django.core.serializers.json import DjangoJSONEncoder
+from pytz import timezone
 
 from team_rooster.models import TeamRooster
 
@@ -246,7 +247,7 @@ class ScreencastPage(Page):
                 team_1_logo = match.team_1.team_logo.get_rendition('width-400')
                 team_2_logo = match.team_2.team_logo.get_rendition('width-400')
                 beginnt_date = json.dumps(match.starts_at.date().strftime("%d-%m-%Y"), cls=DjangoJSONEncoder)
-                beginnt_zeit = json.dumps(match.starts_at.time().strftime("%H:%M"), cls=DjangoJSONEncoder)
+                beginnt_zeit = json.dumps(match.starts_at.astimezone(timezone("Europe/Zurich")).time().strftime("%H:%M"), cls=DjangoJSONEncoder)
                 result.append({
                     'beginnt_date': beginnt_date,
                     'beginnt_zeit': beginnt_zeit,
@@ -263,7 +264,8 @@ class ScreencastPage(Page):
                     'team_2_score': match.team_2_total_score,
                     'team_2_logo': team_2_logo.url,
                 })
-
+            print(beginnt_date)
+            print(beginnt_zeit)
             json_output = json.dumps(result)
             return HttpResponse(json_output)
         else:
