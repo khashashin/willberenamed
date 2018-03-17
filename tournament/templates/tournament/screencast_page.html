@@ -24,9 +24,76 @@
     <div id="fullscreen" class="matchflex">
       <ul class="ulup">
         <li class="logo_bg first_team">{% image spiel.team_1.team_logo width-400 class="logo" %}<p>{{spiel.team_1.title}}</p></li>
-        <li class="first_team_score">{{ spiel.team_1_total_score }}</li>
-        <li class="colons">:</li>
-        <li class="second_team_score">{{ spiel.team_2_total_score }}</li>
+        <li class="score"><p class="first_team_score">{{ spiel.team_1_total_score }}</p><p>:</p><p class="second_team_score">{{ spiel.team_2_total_score }}</p></li>
+        {% if spiel.finalphase == False %}
+        <span class="phasen">
+            <p>|</p>
+              {% if spiel.team_1_shootout_score != None %}
+                <p class="space" id="t1shoots">{{ spiel.team_1_shootout_score }}</p>
+              {% else %}
+                <p class="space" id="t1shoots">-</p>
+              {% endif %}
+                <p>:</p>
+              {% if spiel.team_2_shootout_score != None %}
+                <p class="space" id="t2shoots">{{ spiel.team_2_shootout_score }}</p>
+              {% else %}
+                <p class="space" id="t2shoots">-</p>
+              {% endif %}
+            <p>|</p>
+              {% if spiel.team_1_first_halftime_score != None %}
+                <p class="space" id="t1ehs">{{spiel.team_1_first_halftime_score}}</p>
+              {% else %}
+                <p class="space" id="t1ehs">-</p>
+              {% endif %}
+                <p>:</p>
+              {% if spiel.team_2_first_halftime_score != None %}
+                <p class="space" id="t2ehs">{{spiel.team_2_first_halftime_score}}</p>
+              {% else %}
+                <p class="space" id="t2ehs">-</p>
+              {% endif %}
+            <p>|</p>
+              {% if spiel.team_1_second_halftime_score != None %}
+                <p class="space" id="t1zhs">{{spiel.team_1_second_halftime_score}}</p>
+              {% else %}
+                <p class="space" id="t1zhs">-</p>
+              {% endif %}
+                <p>:</p>
+              {% if spiel.team_2_second_halftime_score != None %}
+                <p class="space" id="t2zhs">{{spiel.team_2_second_halftime_score}}</p>
+              {% else %}
+                <p class="space" id="t2zhs">-</p>
+              {% endif %}
+            <p>|</p>
+        </span>
+        {% elif spiel.finalphase == True %}
+        <span class="finalphasen">
+            <p>|</p>
+              {% if spiel.team_1_first_halftime_score != None %}
+                <p class="space" id="t1ehs">{{spiel.team_1_first_halftime_score}}</p>
+              {% else %}
+                <p class="space" id="t1ehs">-</p>
+              {% endif %}
+                <p>:</p>
+              {% if spiel.team_2_first_halftime_score != None %}
+                <p class="space" id="t2ehs">{{spiel.team_2_first_halftime_score}}</p>
+              {% else %}
+                <p class="space" id="t2ehs">-</p>
+              {% endif %}
+            <p>|</p>
+              {% if spiel.team_1_second_halftime_score != None %}
+                <p class="space" id="t1zhs">{{spiel.team_1_second_halftime_score}}</p>
+              {% else %}
+                <p class="space" id="t1zhs">-</p>
+              {% endif %}
+                <p>:</p>
+              {% if spiel.team_2_second_halftime_score != None %}
+                <p class="space" id="t2zhs">{{spiel.team_2_second_halftime_score}}</p>
+              {% else %}
+                <p class="space" id="t2zhs">-</p>
+              {% endif %}
+            <p>|</p>
+        </span>
+        {% endif %}
         <li class="logo_bg second_team">{% image spiel.team_2.team_logo width-400 class="logo" %}<p>{{spiel.team_2.title}}</p></li>
       </ul>
     </div>

@@ -92,16 +92,23 @@ margin: 0;
 .innerul li:nth-child(1) {
 top: 0;
 }
-.ulup > span {
+.ulup .phasen {
   position: absolute;
   bottom: 30px;
   left: 49%;
   margin-left: -88px;
 }
+.ulup .finalphasen {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  margin-left: -68px;
+}
 .space {
   padding: 0 5px 0 5px;
 }
-.phasen p {
+.phasen p,
+.finalphasen p {
   display: inline-block;
   font-size: 30px;
   font-weight: bold;

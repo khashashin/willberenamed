@@ -161,7 +161,7 @@ class GroupstageTournamentModel(ClusterableModel):
             elif instance.team_1_second_halftime_score == instance.team_2_second_halftime_score:
                 instance.team_2_second_halftime_point = 1
                 instance.team_1_second_halftime_point = 1
-        if not instance.finalphase:
+        if instance.finalphase:
             instance.team_1_shootout_score = 0
             instance.team_2_shootout_score = 0
         # Total score calculation Team 1
