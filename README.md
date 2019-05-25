@@ -14,7 +14,7 @@ After creating the matches, you can create a presentation page to the current re
 
 | | |
 |-|-|
-|![1](docs/images/1.png)|![6](docs/images/6.png)|
+|![1](docs/images/1.png)|![6](docs/images/7.png)|
 
 
 **Backend setup**
