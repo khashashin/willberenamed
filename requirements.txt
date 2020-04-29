@@ -29,7 +29,7 @@ six==1.11.0
 static3==0.7.0
 Unidecode==0.4.21
 urllib3==1.22
-wagtail==1.13.1
+wagtail==2.7.2
 wagtail-modelchooser==0.3.1
 wagtailblocks-cards==2.0.1
 wagtailfontawesome==1.1.3
